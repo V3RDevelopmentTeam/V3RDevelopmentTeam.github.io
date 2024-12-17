@@ -1,0 +1,88 @@
+body {
+    background-image: url('https://i.ibb.co/QFbWzts/Roblox-Screen-Shot20240616-010453442.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-y: auto; /* Allow scrolling */
+}
+
+.content {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+    text-align: center;
+    width: 80%;
+    max-width: 800px;
+    margin: 20px auto; /* Add margin to avoid overlap */
+}
+/* General styling for the top bar */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px; /* Adjust padding for smaller top bar */
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Logo size adjustments */
+.upper-logo {
+    max-width: 70px; /* Smaller logo size */
+    height: auto;
+}
+
+/* Media query for landscape orientation */
+@media screen and (orientation: landscape) {
+    /* Reduce top bar height in landscape mode */
+    header {
+        padding: 5px 15px; /* Smaller padding for top bar */
+    }
+
+    /* Resize the logo specifically for landscape mode */
+    .upper-logo {
+        max-width: 50px; /* Smaller logo size for landscape mode */
+        height: auto;
+    }
+
+    /* Adjust other elements if needed */
+    nav ul {
+        gap: 10px; /* Slightly reduce gap between menu items */
+    }
+}
+
+/* Mobile specific adjustments for smaller screens */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .upper-logo {
+        max-width: 50px; /* Even smaller logo for mobile */
+    }
+
+    .bottom-bar {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .bottom-bar-left,
+    .bottom-bar-right {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    main {
+        margin-bottom: 100px; /* Extra margin on mobile to avoid overlap */
+    }
+}
