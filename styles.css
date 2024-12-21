@@ -1,3 +1,4 @@
+/* General Styles */
 body {
     background-image: url('https://i.ibb.co/QFbWzts/Roblox-Screen-Shot20240616-010453442.png');
     background-size: cover;
@@ -5,84 +6,115 @@ body {
     background-position: center;
     margin: 0;
     font-family: 'Montserrat', sans-serif;
+    color: white;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    overflow-y: auto; /* Allow scrolling */
 }
 
-.content {
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 20px;
-    border-radius: 10px;
-    color: white;
-    text-align: center;
-    width: 80%;
-    max-width: 800px;
-    margin: 20px auto; /* Add margin to avoid overlap */
-}
-/* General styling for the top bar */
-header {
+/* Top Bar */
+.top-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px; /* Adjust padding for smaller top bar */
+    padding: 15px 20px;
     background-color: rgba(0, 0, 0, 0.8);
 }
 
-/* Logo size adjustments */
-.upper-logo {
-    max-width: 70px; /* Smaller logo size */
+.logo {
+    max-width: 70px;
     height: auto;
 }
 
-/* Media query for landscape orientation */
-@media screen and (orientation: landscape) {
-    /* Reduce top bar height in landscape mode */
-    header {
-        padding: 5px 15px; /* Smaller padding for top bar */
-    }
+.nav-menu ul {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+    margin: 0;
+    padding: 0;
+}
 
-    /* Resize the logo specifically for landscape mode */
-    .upper-logo {
-        max-width: 50px; /* Smaller logo size for landscape mode */
-        height: auto;
-    }
+.nav-menu a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: color 0.3s;
+}
 
-    /* Adjust other elements if needed */
-    nav ul {
-        gap: 10px; /* Slightly reduce gap between menu items */
+.nav-menu a:hover {
+    color: #00bfff;
+}
+
+/* Main Content */
+main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.content {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 30px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 600px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.countdown {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+/* Bottom Bar */
+.bottom-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: rgba(0, 0, 0, 0.8);
+    font-size: 0.9rem;
+}
+
+.bottom-bar a {
+    color: white;
+    text-decoration: none;
+    margin: 0 5px;
+    transition: color 0.3s;
+}
+
+.bottom-bar a:hover {
+    color: #00bfff;
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
     }
 }
 
-/* Mobile specific adjustments for smaller screens */
+/* Responsive Styles */
 @media (max-width: 768px) {
-    header {
+    .top-bar {
         flex-direction: column;
         align-items: flex-start;
     }
 
-    nav ul {
+    .nav-menu ul {
         flex-direction: column;
         gap: 10px;
-    }
-
-    .upper-logo {
-        max-width: 50px; /* Even smaller logo for mobile */
     }
 
     .bottom-bar {
         flex-direction: column;
         text-align: center;
-    }
-
-    .bottom-bar-left,
-    .bottom-bar-right {
-        text-align: center;
-        margin-bottom: 10px;
-    }
-
-    main {
-        margin-bottom: 100px; /* Extra margin on mobile to avoid overlap */
     }
 }
