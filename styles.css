@@ -103,9 +103,12 @@ main {
 
 /* Responsive Styles */
 @media (max-width: 768px) {
+    /* Top Bar */
     .top-bar {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
+        gap: 10px;
+        padding: 10px;
     }
 
     .nav-menu ul {
@@ -113,8 +116,42 @@ main {
         gap: 10px;
     }
 
+    .nav-menu a {
+        font-size: 1rem;
+    }
+
+    /* Main Content */
+    .content {
+        padding: 20px;
+        width: 95%;
+    }
+
+    .countdown {
+        font-size: 1.5rem;
+    }
+
+    /* Bottom Bar */
     .bottom-bar {
         flex-direction: column;
         text-align: center;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-menu a {
+        font-size: 0.9rem;
+    }
+
+    .countdown {
+        font-size: 1.3rem;
+    }
+
+    .content {
+        padding: 15px;
+    }
+
+    .logo {
+        max-width: 50px;
     }
 }
