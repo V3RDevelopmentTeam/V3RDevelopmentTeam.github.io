@@ -22,7 +22,10 @@ body {
 }
 
 .logo {
+
+    max-width: 60px;
     max-width: 70px;
+
     height: auto;
 }
 
@@ -61,6 +64,11 @@ main {
     border-radius: 10px;
     width: 90%;
     max-width: 600px;
+
+    border: 1px solid black;
+    outline-style: solid;
+    outline-color: rgb(255,255,255);
+    outline-width: 2px;
     animation: fadeIn 1s ease-in-out;
 }
 
@@ -91,6 +99,20 @@ main {
     color: #00bfff;
 }
 
+
+.bottom-bar img {
+ width: 30;
+ height: auto;
+ filter: hue-rotate(0deg)
+ transition: filter 0.3s ease;
+}
+
+.bottom-bar img:hover {
+  filter: hue-rotate(180deg)
+}
+
+
+
 /* Fade-in Animation */
 @keyframes fadeIn {
     from {
@@ -111,6 +133,14 @@ main {
         padding: 10px;
     }
 
+    .top-bar a {
+         width: 20;
+         height: auto;
+        }  
+  
+
+
+
     .nav-menu ul {
         flex-direction: column;
         gap: 10px;
@@ -118,6 +148,13 @@ main {
 
     .nav-menu a {
         font-size: 1rem;
+
+    }
+
+    /* Main Content */
+    .content {
+        padding: 20px;
+        width: 95%;
     }
 
     /* Main Content */
@@ -128,6 +165,7 @@ main {
 
     .countdown {
         font-size: 1.5rem;
+
     }
 
     /* Bottom Bar */
