@@ -26,6 +26,11 @@ body {
     height: auto;
 }
 
+.logo1 {
+    max-width: 40px;
+    height: auto;
+}
+
 .nav-menu ul {
     list-style: none;
     display: flex;
@@ -68,6 +73,19 @@ main {
     animation: fadeIn 1s ease-in-out;
 }
 
+.content2 {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 50px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 800px;
+    border: 1px solid black;
+    outline-style: solid;
+    outline-color: rgb(255,255,255);
+    outline-width: 2px;
+    animation: fadeIn 1s ease-in-out;
+}
+
 .countdown {
     font-size: 2rem;
     font-weight: bold;
@@ -96,14 +114,14 @@ main {
 }
 
 .bottom-bar img {
- width: 30px;
+ width: 30;
  height: auto;
- filter: hue-rotate(0deg);
+ filter: hue-rotate(0deg)
  transition: filter 0.3s ease;
 }
 
 .bottom-bar img:hover {
-  filter: hue-rotate(180deg);
+  filter: hue-rotate(180deg)
 }
 
 /* Fade-in Animation */
@@ -128,11 +146,10 @@ main {
     .top-bar a {
          width: 20;
          height: auto;
-         align-items: center;
+         align-items: center
         }  
   
     .nav-menu ul {
-        text-align: center;
         flex-direction: column;
         gap: 10px;
     }
@@ -156,9 +173,6 @@ main {
 }
 
 @media (max-width: 480px) {
-    .nav-menu ul {
-    text-align: center;
-    }
     .nav-menu a {
         font-size: 0.9rem;
     }
