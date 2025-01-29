@@ -3,7 +3,7 @@ body {
     background-image: url('https://i.ibb.co/QFbWzts/Roblox-Screen-Shot20240616-010453442.png');
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: center;
+    background-attachment: fixed;
     margin: 0;
     font-family: 'Montserrat', sans-serif;
     color: white;
@@ -37,6 +37,7 @@ body {
 }
 
 .nav-menu ul {
+    transform: translateX(-20%);
     list-style: none;
     display: flex;
     gap: 15px;
@@ -134,7 +135,7 @@ main {
 }
 
 /* Caret icon */
-.collapsible::after {
+.collapsible:after {
     content: "▼"; /* Down Arrow by default */
     font-size: 1.2rem;
     position: absolute;
@@ -143,7 +144,7 @@ main {
 }
 
 /* Rotate caret when active */
-.collapsible.active::after {
+.collapsible.active:after {
     transform: rotate(180deg);
 }
 
@@ -159,12 +160,12 @@ main {
 .collapsible.active + .collapse {
     max-height: 500px; /* Adjust height as needed */
     opacity: 1;
+    display: block;
 }
 
 /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
 .active, .collapsible:hover {
   background-color: #1489FE;
-    outline: 2px;
 }
 
 .countdown {
@@ -200,14 +201,15 @@ main {
 }
 
 .bottom-bar img {
+ transform: translateX(-100%);
  width: 30;
  height: auto;
- filter: hue-rotate(0deg)
+ filter: hue-rotate(0deg);
  transition: filter 0.3s ease;
 }
 
 .bottom-bar img:hover {
-  filter: hue-rotate(180deg)
+  filter: hue-rotate(180deg);
 }
 
 /* burger */
@@ -301,6 +303,19 @@ main {
 
 /* Responsive Fixes */
 @media (max-width: 768px) {
+
+  #theme-toggle {
+    background: none;
+    border: none;
+    font-size: 15px;
+}
+
+  
+  .logo1 {
+    max-width: 30px;
+    height: auto;
+    }
+
     .top-bar {
         flex-direction: column;
         align-items: center;
@@ -315,8 +330,6 @@ main {
     .menu-toggle {
         display: block;
     }
-
-  
   
     .mobile-nav {
         position: fixed;
