@@ -1,11 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Select all collapsible buttons
+    // Mobile Navigation Toggle
     const menuToggle = document.querySelector(".menu-toggle");
     const closeMenu = document.querySelector(".close-menu");
     const mobileNav = document.querySelector(".mobile-nav");
-    const collapsibles = document.querySelectorAll(".collapsible");
 
-  
     menuToggle.addEventListener("click", function () {
         mobileNav.classList.add("active");
     });
@@ -13,6 +11,9 @@ document.addEventListener("DOMContentLoaded", function () {
     closeMenu.addEventListener("click", function () {
         mobileNav.classList.remove("active");
     });
+
+    // Collapsible Sections
+    const collapsibles = document.querySelectorAll(".collapsible");
 
     collapsibles.forEach(button => {
         button.addEventListener("click", function () {
@@ -28,4 +29,4 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     });
-});
+      });
