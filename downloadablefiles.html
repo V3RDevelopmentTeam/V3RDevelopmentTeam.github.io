@@ -52,9 +52,37 @@
     <label for="file-select">Choose a file to download:</label>
 <select id="file-select">
     <option value="" disabled selected hidden>Select a file</option>
-    <option value="downloadablefiles/Gen%201%20V3R%20Lanyard.pdf">V3R Lanyard G1</option>
+    <option value="lanyard1">V3R Lanyard G1</option>
 </select>
-    <button id="download-btn">Download</button>
+  <button id="download-Btn">Download</button>
+  <script>
+    document.getElementById("downloadBtn").addEventListener("click", function() {
+        let fileSelect = document.getElementById("file-select");
+        let selectedValue = fileSelect.value; // Get selected option value
+
+        if (!selectedValue) {
+            alert("Please select a file to download.");
+            return;
+        }
+
+        let fileMap = {
+            "lanyard1": "downloadablefiles/Gen 1 V3R Lanyard.pdf", // Replace with the actual PDF file path
+        };
+
+        let fileUrl = fileMap[selectedValue];
+
+        if (fileUrl) {
+            let a = document.createElement("a");
+            a.href = fileUrl;
+            a.download = selectedValue + ".pdf"; // Name the downloaded file
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        } else {
+            alert("File not found!");
+        }
+    });
+</script>
 </div>
 
   </section>
@@ -84,6 +112,6 @@
     </footer>
     </footer>
 
-    <script src="downloadablefile.js"></script>
+    <script src="collapse.js"></script>
 </body>
 </html>
