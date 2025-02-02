@@ -1,3 +1,231 @@
+/* ========== General Styles ========== */
+body {
+    background: url('https://i.ibb.co/QFbWzts/Roblox-Screen-Shot20240616-010453442.png') no-repeat center/cover fixed;
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* ========== Top Bar ========== */
+.top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+}
+
+
+.logo {
+    max-width: 60px;
+}
+
+.logo1 {
+    max-width: 40px;
+}
+
+
+/* Navigation */
+.nav-menu ul {
+    display: flex;
+    gap: 15px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    transform: translateX(-20%);
+}
+
+.nav-menu a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: color 0.3s;
+}
+
+.nav-menu a:hover {
+    color: #00bfff;
+}
+
+/* Main Content */
+main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 80px 20px 50px; /* Top padding offsets fixed top bar */
+}
+
+.content, .content2 {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 30px;
+    border-radius: 10px;
+    border: 1px solid black;
+    outline: 2px solid white;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.content2 {
+    padding: 50px;
+    max-width: 800px;
+}
+
+.content {
+    max-width: 600px;
+}
+
+/* ========== Collapsible Sections ========== */
+.collapse {
+    display: none;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.collapse p {
+    margin: 0;
+    padding: 5px 10px;
+    text-align: left;
+}
+
+.p1 {
+    text-align: left;
+}
+
+/* Collapsible Button */
+.collapsible {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 10px 0;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    background: #0C60B4;
+    color: white;
+    cursor: pointer;
+    text-align: left;
+    outline: none;
+    transition: background 0.3s;
+    position: relative;
+}
+
+.collapsible:after {
+    content: "▼";
+    font-size: 1.2rem;
+    position: absolute;
+    right: 15px;
+    transition: transform 0.3s ease;
+}
+
+.collapsible.active:after {
+    transform: rotate(180deg);
+}
+
+/* Smooth transition for collapsible content */
+.collapse {
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.5s ease, opacity 0.3s ease;
+}
+
+/* Expand collapsible content */
+.collapsible.active + .collapse {
+    max-height: 500px;
+    opacity: 1;
+    display: block;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active, .collapsible:hover {
+  background-color: #1489FE;
+}
+
+/* Countdown Timer */
+.countdown {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+/* ========== Bottom Bar ========== */
+.bottom-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background: rgba(0, 0, 0, 0.8);
+    font-size: 0.9rem;
+    z-index: 1000;
+}
+
+.bottom-bar a {
+    color: white;
+    text-decoration: none;
+    margin: 0 5px;
+    transition: color 0.3s;
+}
+
+.bottom-bar a:hover {
+    color: #00bfff;
+}
+
+/* Bottom Bar Image */
+.bottom-bar img {
+    transform: translateX(-100%);
+    width: 30px;
+    height: auto;
+    filter: hue-rotate(0deg);
+    transition: filter 0.3s ease;
+}
+
+.bottom-bar img:hover {
+    filter: hue-rotate(180deg);
+}
+
+/* ========== Mobile Navigation ========== */
+.menu-toggle {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: white;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+    z-index: 1100;
+    display: none;
+}
+
+.close-menu {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: white;
+    cursor: pointer;
+    z-index: 1101;
+    transition: transform 0.3s ease;
+}
+
 .close-menu:hover {
     transform: rotate(90deg);
     color: red;
