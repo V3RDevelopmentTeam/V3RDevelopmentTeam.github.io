@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Outfit', sans-serif;
+            color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 60px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        section::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            z-index: -2;
+        }
+
+        section::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: -1;
+        }
+
+        /* Unique backgrounds per section */
+        #about::before {
+            background-image: url("https://images.unsplash.com/photo-1503264116251-35a269479413");
+        }
+
+        #story::before {
+            background-image: url("https://images.unsplash.com/photo-1482192596544-9eb780fc7f66");
+        }
+
+        #mission::before {
+            background-image: url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e");
+        }
+
+        #team::before {
+            background-image: url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee");
+        }
+
+        h1,
+        h2 {
+            margin-bottom: 20px;
+            color: #66d9ff;
+            text-shadow: 0px 2px 6px rgba(0, 0, 0, 0.8);
+        }
+
+        p.lead {
+            font-size: 1.2rem;
+            color: #e0e0e0;
+            margin-bottom: 30px;
+            max-width: 800px;
+        }
+
+        /* Team Cards */
+        .team {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        .member {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .member:hover {
+            transform: translateY(-8px);
+        }
+
+        .member img {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+            border: 3px solid #66d9ff;
+        }
+
+        .member h3 {
+            margin: 10px 0 5px;
+            font-size: 1.3rem;
+        }
+
+        .description {
+            font-size: 0.95rem;
+            color: #ccc;
+            max-height: 4.5em;
+            overflow: hidden;
+            position: relative;
+            transition: max-height 0.6s ease;
+        }
+
+        .description.fade::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2em;
+            background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.7));
+            pointer-events: none;
+        }
+
+        .description.expanded {
+            max-height: 500px;
+        }
+
+        .toggle-btn {
+            background: none;
+            border: none;
+            color: #66d9ff;
+            cursor: pointer;
+            margin-top: 10px;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .toggle-btn:hover {
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- About Section -->
+    <section id="about">
+        <h1>About Us</h1>
+        <p class="lead">We are a passionate team dedicated to building creative projects that inspire, innovate, and
+            connect people worldwide.</p>
+    </section>
+
+    <!-- Story Section -->
+    <section id="story">
+        <h2>Our Story</h2>
+        <p class="lead">Founded with the belief that technology and creativity should go hand-in-hand, we started our
+            journey as
+            a small group of developers and storytellers. Today, we continue to push boundaries and craft
+            experiences that leave a lasting impact.</p>
+    </section>
+
+    <!-- Mission Section -->
+    <section id="mission">
+        <h2>Our Mission</h2>
+        <p class="lead">Our mission is to design and develop meaningful projects that spark imagination, bring
+            communities
+            together, and redefine how people interact with the digital world.</p>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team">
+        <h2>Meet the Team</h2>
+        <div class="team">
+            <div class="member">
+                <img src="https://via.placeholder.com/90" alt="Team Member">
+                <h3>Alex Johnson</h3>
+                <p class="description fade">Creative Director with a vision for design that blends technology and
+                    artistry into
+                    immersive experiences, leading our creative strategies and guiding the visual direction of projects.
+                </p>
+                <button class="toggle-btn">Read more</button>
+            </div>
+            <div class="member">
+                <img src="https://via.placeholder.com/90" alt="Team Member">
+                <h3>Samantha Lee</h3>
+                <p class="description fade">Lead Developer who codes ideas into reality, ensuring seamless
+                    functionality,
+                    performance, and bringing innovative technical solutions to every challenge.</p>
+                <button class="toggle-btn">Read more</button>
+            </div>
+            <div class="member">
+                <img src="https://via.placeholder.com/90" alt="Team Member">
+                <h3>Michael Smith</h3>
+                <p class="description fade">Project Manager who keeps the team aligned, making sure deadlines are met
+                    while
+                    maintaining creativity, focus, and collaboration across all phases of development.</p>
+                <button class="toggle-btn">Read more</button>
+            </div>
+            <div class="member">
+                <img src="https://via.placeholder.com/90" alt="Team Member">
+                <h3>Jessica Brown</h3>
+                <p class="description fade">UI/UX Designer shaping how people experience our products, crafting
+                    user-centered
+                    interfaces that are both beautiful and intuitive for diverse audiences.</p>
+                <button class="toggle-btn">Read more</button>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.querySelectorAll(".toggle-btn").forEach(btn => {
+            btn.addEventListener("click", () => {
+                const desc = btn.previousElementSibling;
+                desc.classList.toggle("expanded");
+                desc.classList.toggle("fade");
+                btn.textContent = desc.classList.contains("expanded") ? "Read less" : "Read more";
+            });
+        });
+    </script>
+</body>
+
+</html>

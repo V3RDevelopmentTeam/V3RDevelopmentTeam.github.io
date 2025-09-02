@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Neoflare</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="resources/TNFP/favicon.ico">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- PC Version -->
+    <header class="topbar-pc">
+        <div class="nav-pc">
+            <div class="nav-buttons">
+                <a href="#index">Home</a>
+                <a href="#project">Project</a>
+            </div>
+            <img src="resources/images/v4r.png" alt="V3R Logo" class="logo-pc">
+            <div class="nav-buttons">
+                <a href="#variant">Variant</a>
+                <a href="#about">About</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Version -->
+    <header class="topbar-mobile">
+        <img src="resources/images/v4r.png" alt="V3R Logo" class="logo-mobile">
+        <div class="nav-mobile">
+            <a href="#index">Home</a>
+            <a href="#project">Project</a>
+            <a href="#variant">Variant</a>
+            <a href="#about">About</a>
+        </div>
+    </header>
+
+
+    <!-- Box 1 -->
+    <section id="box1" class="hidden">
+        <video autoplay muted loop>
+            <source src="resources/Introduction.mp4" type="video/mp4">
+        </video>
+        <div class="countdown-container">
+            <img src="resources/images/tNFp.png">
+            <h2>The Neoflare Project</h2>
+            <div id="countdown" class="countdown"></div>
+            <p>This site is under maintenance. Powered by GitHub Pages.</p>
+        </div>
+    </section>
+
+    <!-- Box 2 -->
+    <section id="box2" class="hidden">
+        <div>
+            <h1>About Our Work</h1>
+            <p>At V3R Development Team, we create games enjoyable for players. Not just players, but friends and family.
+                We're not just a development team basing on one language, </p>
+            <p>
+                we're making it even more. Our website, stories, projects, and such more.</p>
+        </div>
+    </section>
+
+    <!-- Box 3 -->
+    <section id="box3" class="hidden">
+        <img src="resources/images/VARIANTTHUMBNAIL.png" alt="V3R Product Preview">
+        <div class="text">
+            <h1>Variant</h1>
+            <p>Variant, a V3R Development Team Fandom. For people, enthuasist or fans that are interested in our work!
+                Not only for fans, but the people who have different talent like us! // Implementation will be coming
+                soon.
+            </p>
+        </div>
+
+    </section>
+
+    <section id="box4" class="hidden">
+        <p> The rest.</p>
+        <div class="slideshow-container">
+            <div class="fade-slide">
+                <img src="resources/images/NSDATC.png">
+            </div>
+            <div class="fade-slide">
+                <img src="resources/images/NDHQ.png">
+            </div>
+            <div class="fade-slide">
+                <img src="resources/images/TLPTHUMBNAIL.png">
+            </div>
+            <div class="fade-slide">
+                <img src="resources/images/DRF.png">
+            </div>
+            <div class="fade-slide">
+                <img src="resources/images/NEOFLARETHUMBNAIL.png">
+            </div>
+        </div>
+        <p>Became history.</p>
+    </section>
+
+    <script>
+        // Run after page load
+        document.addEventListener("DOMContentLoaded", () => {
+            const hiddenElements = document.querySelectorAll(".hidden");
+
+            // Option 1: Show immediately
+            hiddenElements.forEach(el => el.classList.add("show"));
+
+            // Option 2: Show only when scrolled into view
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("show");
+                        observer.unobserve(entry.target); // animate only once
+                    }
+                });
+            }, { threshold: 0.2 });
+            countdownTimer();
+
+            hiddenElements.forEach(el => observer.observe(el));
+        });
+
+        const menuToggle = document.querySelector('.menu-toggle');
+        const mobileNav = document.getElementById('mobileNav');
+
+        menuToggle.addEventListener('click', () => {
+            mobileNav.style.display = mobileNav.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // Countdown Timer
+        function countdownTimer() {
+            const targetDate = new Date("September 5, 2025 18:00:00 GMT+8").getTime();
+            const countdownElement = document.getElementById("countdown");
+
+            const interval = setInterval(function () {
+                const now = new Date().getTime();
+                const distance = targetDate - now;
+
+                if (distance < 0) {
+                    clearInterval(interval);
+                    countdownElement.innerHTML = "Event Started!";
+                    return;
+                }
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+            }, 1000);
+        }
+    </script>
+</body>
+
+</html>
