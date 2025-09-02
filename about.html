@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Fixed to your font: Outfit -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="resources/TNFP/favicon.ico">
+    <title>Neoflare — About Us</title>
+    <style>
+        :root {
+            --accent: #1a74d1;
+            --accent-glow: rgba(26, 116, 209, 0.35);
+            --text: #ffffff;
+            --muted: #808080;
+            --plain-bg: rgba(0, 0, 0, 0.836);
+            --plain-border: #d6d6d6;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            font-family: "Outfit", sans-serif;
+            /* Fixed here */
+            color: var(--text);
+            overflow-y: auto;
+        }
+
+        .lighting::before,
+        .lighting::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(800px 400px at 20% 20%, rgba(255, 255, 255, 0.15), transparent 70%),
+                radial-gradient(700px 350px at 80% 30%, rgba(255, 255, 255, 0.1), transparent 70%);
+            pointer-events: none;
+            mix-blend-mode: screen;
+            animation: drift 30s linear infinite;
+        }
+
+        .lighting::after {
+            animation-direction: reverse;
+        }
+
+        @keyframes drift {
+            to {
+                transform: translateX(-5%) translateY(-3%);
+            }
+        }
+
+        .page-wrap {
+            position: relative;
+            min-height: 100%;
+            display: grid;
+            place-items: center;
+            padding: 6rem 1.25rem;
+        }
+
+        .panel {
+            position: relative;
+            width: 100%;
+            max-width: 1080px;
+            padding: 2.5rem;
+            border-radius: 16px;
+            background: var(--plain-bg);
+            border: 1px solid var(--plain-border);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .header {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.25rem;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        p.lead {
+            text-align: center;
+            margin: 0 0 1.5rem;
+            line-height: 1.6;
+            font-size: 1.1rem;
+            color: #b6b6b6;
+        }
+
+        .divider {
+            height: 1px;
+            margin: 1.5rem 0;
+            background: linear-gradient(to right, transparent, #aaa, transparent);
+        }
+
+        .about {
+            margin-bottom: 1.2rem;
+            padding: 1.25rem;
+            border-radius: 14px;
+            background: var(--plain-bg);
+            border: 1px solid var(--plain-border);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .about img {
+            max-width: 50%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            border-radius: 10px;
+        }
+
+        .about h2 {
+            margin: 0 0 .5rem;
+            font-size: 1.3rem;
+            color: #ffffff;
+            text-align: center;
+        }
+
+        .about p {
+            margin: 0;
+            line-height: 1.8;
+            color: #b6b6b6;
+            text-align: center;
+        }
+
+        .team {
+            margin-top: 1.5rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+
+        .member {
+            cursor: pointer;
+            padding: 1rem;
+            border-radius: 14px;
+            background: var(--plain-bg);
+            border: 1px solid var(--plain-border);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+            transition: transform .2s ease, box-shadow .2s ease;
+            text-align: center;
+        }
+
+        .member:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .member img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+            margin-bottom: .5rem;
+        }
+
+        #bg-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+            /* stays behind everything */
+        }
+
+        .lighting {
+            z-index: -1;
+            /* keeps lighting above video but behind content */
+        }
+
+        .title {
+            font-weight: 700;
+            color: #ffffff;
+            margin: 0;
+        }
+
+        .handle {
+            margin: .2rem 0;
+            color: #b8b8b8;
+            font-weight: 600;
+        }
+
+        .role {
+            margin: .2rem 0;
+            color: #005eca;
+            font-size: .95rem;
+        }
+
+        /* Socials */
+        .socials {
+            margin-top: .5rem;
+            display: flex;
+            justify-content: center;
+            gap: .6rem;
+        }
+
+        .socials a {
+            display: inline-block;
+            width: 28px;
+            height: 28px;
+        }
+
+        .socials img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: brightness(0) invert(1);
+            transition: transform 0.2s ease;
+        }
+
+        .socials img:hover {
+            transform: scale(1.2);
+        }
+
+        .back-btn {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back-btn a {
+            display: inline-block;
+            padding: 10px 20px;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .back-btn a:hover {
+            background: rgba(0, 0, 0, 0.7);
+            transform: scale(1.05);
+        }
+
+        @media(max-width:600px) {
+            .panel {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Notification styles */
+        .notification {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            background: var(--plain-bg);
+            border: 1px solid var(--plain-border);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
+            border-radius: 14px;
+            padding: 1.2rem 1.5rem;
+            max-width: 340px;
+            color: var(--text);
+            font-size: 1rem;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            z-index: 999;
+            cursor: pointer;
+        }
+
+        .notification.show {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Video Background -->
+    <video autoplay muted loop playsinline id="bg-video">
+        <source src="resources/About.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+    </video>
+
+    <div class="lighting"></div>
+    <main class="page-wrap">
+        <section class="panel">
+            <div class="header">
+                <h1>About Us</h1>
+            </div>
+
+            <p class="lead">
+                V3R Development Team is a indie development team, founded by Ray JL (@XNewXDev).
+                From passion, imagination, and innovation. We develop mostly on ROBLOX, but we're going far more than
+                that.
+            </p>
+
+            <div class="divider"></div>
+            <article class="about">
+                <h2>Our History</h2>
+                <p>We were friends before V3R Development Team, then there was The Luminous Project, a story/lore we've
+                    been making for a long time. A project with 3 Developers. Due to personal issues, The Luminous
+                    Project Developers broke up and seperated.
+                    Several months and days later, Ray decided to create a new name of our development team, founded V3R
+                    Development Team. Currently 2
+                    developers as of now.
+                </p>
+            </article>
+            <article class="about">
+                <h2>The Neoflare Project</h2>
+                <p>A informational, static, all in one website by V3R Development Team. </p>
+                <p> Expect update or changes over-time on this website, Nothing's final unless declared. </p>
+            </article>
+            <article class="about">
+                <h2>Divisions</h2>
+                <img src="resources/divisions/BeD.png">
+                <p>Beverley Division</p>
+                <img src="resources/divisions/FED.png">
+                <p>Far Eastern Division</p>
+            </article>
+            <article class="about">
+                <h2>Our Motto</h2>
+                <p>Passionate, Imagination, Innovation.</p>
+            </article>
+            <article class="about">
+                <h2>V3R Development Team Socials</h2>
+                <p>See our works!</p>
+                <div class="socials">
+                    <a href="https://www.youtube.com/@V3RDevelopmentTeam" target="_blank"><img
+                            src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/youtube.svg"
+                            alt="YouTube"></a>
+                    <a href="https://www.facebook.com/profile.php?id=61563305798037" target="_blank"><img
+                            src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg"
+                            alt="Facebook"></a>
+                    <a href="https://www.instagram.com/v3rdevelopmentteam/" target="_blank"><img
+                            src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg"
+                            alt="Instagram"></a>
+                    <a href="https://www.tiktok.com/@v3r.development_team" target="_blank"><img
+                            src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/tiktok.svg"
+                            alt="TikTok"></a>
+                    <a href="https://www.roblox.com/communities/35178059/V3R-Development-Team" target="_blank"><img
+                            src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/roblox.svg"
+                            alt="Roblox"></a>
+                    <a href="https://discord.gg/EtSGpv4fq5" target="_blank"><img
+                            src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/discord.svg"
+                            alt="Discord"></a>
+                </div>
+                <p>Currently, the social accounts are work in progress. Come back when we've setup!</p>
+            </article>
+            <div class="divider"></div>
+
+            <h2 style="text-align:center; color:#ffffff;">Our Team</h2>
+            <section class="team">
+                <article class="member"
+                    onclick="showNotification('@XNewXDev, Founder of V3R Development Team, lead developer, programmer and builder, and a content creator.')">
+                    <img src="https://tr.rbxcdn.com/30DAY-AvatarHeadshot-26E4394080E092C40211E173C864375D-Png/150/150/AvatarHeadshot/Webp/noFilter"
+                        alt="Ray">
+                    <h3 class="title">Ray</h3>
+                    <div class="handle">@XNewXDev</div>
+                    <div class="role">Founder & Lead Developer</div>
+                    <div class="socials">
+                        <a href="https://www.youtube.com/@neutralra_yyt" target="_blank"><img
+                                src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/youtube.svg"
+                                alt="YouTube"></a>
+                        <a href="https://www.tiktok.com/@officialtiktokneutraray" target="_blank"><img
+                                src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/tiktok.svg"
+                                alt="TikTok"></a>
+                    </div>
+                </article>
+
+                <article class="member"
+                    onclick="showNotification('@EthanProGamerPG9, an animator, builder, and a content creator.')">
+                    <img src="https://tr.rbxcdn.com/30DAY-AvatarHeadshot-055E36135C3FBB0360F0B897380D32C1-Png/150/150/AvatarHeadshot/Webp/noFilter"
+                        alt="Ethan">
+                    <h3 class="title">EthanFox17</h3>
+                    <div class="handle">@EthanProGamerPG9</div>
+                    <div class="role">Developer</div>
+                    <div class="socials">
+                        <a href="https://www.youtube.com/@Ethanfox17" target="_blank"><img
+                                src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/youtube.svg"
+                                alt="YouTube"></a>
+                    </div>
+                </article>
+            </section>
+        </section>
+        <!-- Back Button -->
+        <div class="back-btn">
+            <a href="index.html">← Back</a>
+        </div>
+    </main>
+
+    <!-- Notification container -->
+    <div id="notification" class="notification"></div>
+
+    <script>
+        function showNotification(message) {
+            const notif = document.getElementById("notification");
+            notif.textContent = message;
+            notif.classList.add("show");
+
+            // Allow click to dismiss
+            notif.onclick = () => notif.classList.remove("show");
+
+            // Auto-hide after 3 seconds
+            clearTimeout(notif.timer);
+            notif.timer = setTimeout(() => {
+                notif.classList.remove("show");
+            }, 3000);
+        }
+    </script>
+</body>
+
+</html>

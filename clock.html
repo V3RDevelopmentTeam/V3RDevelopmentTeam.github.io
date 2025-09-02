@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>UTC + Local Clock</title>
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body translate="no" style="margin:0; background:transparent;">
+  <div style="display: inline-block;
+              font-family: 'Roboto Mono', monospace;
+              text-align: center;
+              color: rgb(255, 255, 255); 
+              border-radius: 12px; 
+              padding: 12px 20px;
+              background-color: rgba(0, 0, 0, 0.7);
+              line-height: 1.4;
+              min-width: 380px;">
+
+    <!-- UTC time (smaller, left-aligned) -->
+    <div style="text-align: left;">
+      <div id="utcTime" style="font-size: 18px; font-weight: bold;"></div>
+      <div style="font-size: 11px; opacity: 0.7;">UTC</div>
+    </div>
+
+    <!-- Local time (centered, bigger) -->
+    <div style="text-align: left;">
+      <div id="localTime" style="font-size: 18px; font-weight: bold;"></div>
+      <div style="font-size: 11px; opacity: 0.7;">Local</div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+  <script>
+    function updateClock() {
+      // UTC Time (24-hour format)
+      document.getElementById("utcTime").innerText =
+        moment().utc().format('dddd, MMM D HH:mm:ss');
+
+      // Local Time (12-hour format with AM/PM)
+      document.getElementById("localTime").innerText =
+        moment().format('dddd, MMM D hh:mm:ss A');
+    }
+
+    setInterval(updateClock, 1000);
+    updateClock();
+  </script>
+</body>
+
+</html>

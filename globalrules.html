@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Neoflare</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="resources/TNFP/favicon.ico">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- PC Version -->
+    <header class="topbar-pc">
+        <div class="nav-pc">
+            <div class="nav-buttons">
+                <a href="#index">Home</a>
+                <a href="#project">Project</a>
+            </div>
+            <img src="resources/images/v4r.png" alt="V3R Logo" class="logo-pc">
+            <div class="nav-buttons">
+                <a href="#variant">Variant</a>
+                <a href="#about">About</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Version -->
+    <header class="topbar-mobile">
+        <img src="resources/images/v4r.png" alt="V3R Logo" class="logo-mobile">
+        <div class="nav-mobile">
+            <a href="#index">Home</a>
+            <a href="#project">Project</a>
+            <a href="#variant">Variant</a>
+            <a href="#about">About</a>
+        </div>
+    </header>
+
+
+    <!-- Box 1 -->
+    <section id="box1" class="hidden">
+        <video autoplay muted loop>
+            <source src="resources/Introduction.mp4" type="video/mp4">
+        </video>
+        <div class="countdown-container">
+            <img src="resources/images/tNFp.png">
+            <h2>The Neoflare Project</h2>
+            <div id="countdown" class="countdown"></div>
+            <p>This site is under maintenance. Powered by GitHub Pages.</p>
+        </div>
+    </section>
+
+    <script>
+        // Run after page load
+        document.addEventListener("DOMContentLoaded", () => {
+            const hiddenElements = document.querySelectorAll(".hidden");
+
+            // Option 1: Show immediately
+            hiddenElements.forEach(el => el.classList.add("show"));
+
+            // Option 2: Show only when scrolled into view
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("show");
+                        observer.unobserve(entry.target); // animate only once
+                    }
+                });
+            }, { threshold: 0.2 });
+            countdownTimer();
+
+            hiddenElements.forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+
+</html>
