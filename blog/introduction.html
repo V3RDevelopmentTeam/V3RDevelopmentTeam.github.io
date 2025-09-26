@@ -43,7 +43,7 @@
                     ‘Y’, its roots began all the way
                 </p>
                 <p>from earliest development days of Neutra Lore,
-                    before the V3R Development Team was formed. Then another 2 changed and the vision. </p>
+                   before the V3R Development Team was formed. Then another 2 changed and the vision. </p>
                 <p>|</p>
                 <p>Click 'Read More' to see the full blog post.
                 </p>
@@ -63,39 +63,6 @@
         <span class="icon">←</span>
         <span class="label">Return?</span>
     </a>
-
-    <!-- JS at bottom for cleaner DOM handling -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            document.querySelectorAll('.return-btn').forEach(function (btn) {
-                btn.addEventListener('click', function (e) {
-                    var rect = this.getBoundingClientRect();
-                    var x = (e.clientX || (e.touches && e.touches[0].clientX)) - rect.left;
-                    var y = (e.clientY || (e.touches && e.touches[0].clientY)) - rect.top;
-                    var ripple = document.createElement('span');
-                    ripple.className = 'ripple';
-                    ripple.style.left = x + 'px';
-                    ripple.style.top = y + 'px';
-                    this.appendChild(ripple);
-                    setTimeout(() => ripple.remove(), 700);
-
-                    e.preventDefault();
-                    if (history.length > 1) {
-                        history.back();
-                    } else {
-                        window.location.href = this.getAttribute('href');
-                    }
-                });
-
-                btn.addEventListener('keydown', function (e) {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        this.click();
-                    }
-                });
-            });
-        });
-    </script>
 </body>
 
 </html>
@@ -103,3 +70,4 @@
     <img src="/resources/images/v4r.png" alt="Site Logo">
     <p>© 2025 V3R Development Team</p>
 </footer>
+
