@@ -1,0 +1,336 @@
+/* Base styles */
+body {
+    font-family: "Outfit", sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    background: #0d0d0d;
+    color: #e5e5e5;
+}
+
+
+header {
+    background-image: url('/resources/images/FLAMESRISEN.png');
+    /* your header image */
+    background-size: cover;
+    background-position: center;
+    color: #ffffff;
+    padding: 3rem 1rem;
+    text-align: center;
+    border-bottom: 1px solid #222;
+    position: relative;
+    overflow: hidden;
+    /* makes sure overlay doesn’t spill out */
+}
+
+header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    /* shorthand for top, right, bottom, left: 0 */
+    background: rgba(0, 0, 0, 0.712);
+    /* adjust the 0.55 for more/less dark */
+    z-index: 0;
+}
+
+header * {
+    position: relative;
+    z-index: 1;
+    /* keeps the text above the dark overlay */
+}
+
+
+
+header h1 {
+    margin: 0;
+    font-size: 2.8rem;
+    letter-spacing: 1px;
+}
+
+header img {
+    width: 914px;
+
+}
+
+
+header p {
+    margin-top: 0.8rem;
+    font-size: 1.2rem;
+    color: #aaa;
+}
+
+/* Main layout */
+main {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+    padding: 40px 8%;
+    box-sizing: border-box;
+}
+
+/* Intro section */
+section.intro {
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+section.intro h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #ffffff;
+}
+
+section.intro p {
+    color: #bbb;
+    max-width: 700px;
+    margin: 0 auto;
+    font-size: 1.05rem;
+}
+
+/* Blog grid */
+.blog-card {
+    background: #0a0a0a;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    /* ✅ makes every card occupy full height in the grid cell */
+    min-height: 280px;
+    /* ✅ ensures no tiny squished cards */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.blog-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7);
+}
+
+.blog-author {
+    position: absolute;
+    top: 12px;
+    left: 15px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.6);
+}
+
+
+.blog-header {
+    position: relative;
+    height: 180px;
+    background: #333;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 15px;
+}
+
+.blog-header h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.55);
+    padding: 5px 10px;
+    border-radius: 8px;
+}
+
+.blog-header p {
+    margin: 8px 0 0;
+    font-weight: bold;
+    color: #ccc;
+    background: rgba(0, 0, 0, 0.35);
+    padding: 4px 8px;
+    border-radius: 6px;
+    display: inline-block;
+    font-size: 14px;
+}
+
+.blog-body {
+    padding: 16px;
+    color: #ddd;
+    line-height: 1.6;
+    font-size: 15px;
+    flex-grow: 1;
+    /* ✅ ensures body expands to push footer down */
+}
+
+.blog-body p {
+    margin: 0;
+    line-height: 1.6;
+    color: #ddd;
+}
+
+.blog-footer {
+    padding: 16px;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: auto;
+    /* ✅ locks footer at bottom */
+}
+
+.blog-date {
+    font-size: 13px;
+    color: #888;
+    margin-right: auto;
+    /* ✅ pushes left */
+    align-self: flex-end;
+}
+
+
+.read-btn {
+    padding: 10px 18px;
+    border: 2px solid #2bff59;
+    color: #00f36d;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.read-btn:hover {
+    background: #fff;
+    color: #000;
+    border-color: #000;
+}
+
+.read-btn::after {
+    content: "→";
+    margin-left: 8px;
+    transition: transform 0.3s ease;
+}
+
+.read-btn:hover::after {
+    transform: translateX(5px);
+}
+
+/* Return Button */
+/* Return button (bottom-left, centered arrow, expanding pill + ripple) */
+.return-btn {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    background: rgba(20, 20, 20, 0.85);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6);
+    overflow: hidden;
+    cursor: pointer;
+    z-index: 1000;
+    transition: width 0.35s cubic-bezier(.2, .9, .2, 1), background 0.35s ease, box-shadow 0.35s ease;
+    text-decoration: none;
+    /* if it's an anchor */
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* focus ring for accessibility */
+.return-btn:focus {
+    outline: none;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6), 0 0 0 4px rgba(76, 158, 255, 0.08);
+}
+
+/* collapsed: center the arrow */
+.return-btn .icon {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    line-height: 1;
+    color: #fff;
+    transition: left 0.35s cubic-bezier(.2, .9, .2, 1), transform 0.35s cubic-bezier(.2, .9, .2, 1);
+    pointer-events: none;
+}
+
+/* label (hidden until expanded) */
+.return-btn .label {
+    position: absolute;
+    left: 66px;
+    /* location of label when expanded */
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    color: #ddd;
+    font-weight: 700;
+    font-size: 15px;
+    white-space: nowrap;
+    transition: opacity 0.25s ease;
+    pointer-events: none;
+}
+
+/* expanded state on hover or focus */
+.return-btn:hover,
+.return-btn:focus {
+    width: 140px;
+    background: rgba(40, 40, 40, 0.95);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.8);
+}
+
+/* when expanded, move icon to left padding and reveal label */
+.return-btn:hover .icon,
+.return-btn:focus .icon {
+    left: 18px;
+    transform: translate(0, -50%);
+}
+
+.return-btn:hover .label,
+.return-btn:focus .label {
+    opacity: 1;
+}
+
+/* ripple effect element */
+.return-btn .ripple {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.12);
+    transform: translate(-50%, -50%) scale(0);
+    pointer-events: none;
+    animation: ripple-effect 600ms cubic-bezier(.2, .9, .2, 1);
+}
+
+/* Footer styling */
+.site-footer {
+    background: #0d0d0d;
+    padding: 40px 20px 20px;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.site-footer img {
+    max-width: 120px;
+    margin-bottom: 12px;
+}
+
+.site-footer p {
+    font-size: 13px;
+    color: #777;
+}
+
+@keyframes ripple-effect {
+    to {
+        transform: translate(-50%, -50%) scale(6);
+        opacity: 0;
+    }
+}
+
+/* small tweak for touch users: slightly larger hit area on mobile */
+@media (max-width: 480px) {
+    .return-btn {
+        bottom: 16px;
+        left: 12px;
+    }
+
+    .return-btn {
+        width: 48px;
+        height: 48px;
+    }
+}

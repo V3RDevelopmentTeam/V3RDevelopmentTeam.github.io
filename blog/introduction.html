@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Neoflare — Blog Intro</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="/resources/TNFP/favicon.ico">
+    <link rel="stylesheet" href="blogstyle.css">
+</head>
+
+<body>
+    <header>
+        <h1 style="text-align:center; color:white; margin-top:20px;">V3R Developer's Blog Posts</h1>
+        <p style="text-align:center; color:#aaa;">Our thoughts, stories, passion, imagination, and ideas. Our outcry,
+            feelings, and voices.</p>
+        <p style="text-align:center; color:#aaa;">All blog posts are formally checked, and ensured that no blog posts
+            are not destroying each other's images, by not directly or mentioning,
+
+        </p>
+        <p>
+            with/without personal information or secrets between each other.
+        </p>
+    </header>
+
+    <main>
+        <!-- YCE-->
+        <div class="blog-card">
+            <div class="blog-header" style="background-image: url(/resources/images/NDHQ.png)">
+                <span class="blog-author">by Ray JL</span>
+                <h3>YCE - Why it became a controversial?</h3>
+                <p>IRL (In Real Life) || </p>
+            </div>
+            <div class="blog-body">
+                <p>The ‘YCE’ is what shaped the ideas and the development of The Luminous Project, alternatively known
+                    as "Neutra Lore."
+                </p>
+                <p>
+                    ‘YCE’, however, isn't a simple concept nor idea of what we think of. Before ‘YCE’, It started with
+                    ‘Y’, its roots began all the way
+                </p>
+                <p>from earliest development days of Neutra Lore,
+                    before the V3R Development Team was formed. Then another 2 changed and the vision. </p>
+                <p>|</p>
+                <p>Click 'Read More' to see the full blog post.
+                </p>
+            </div>
+            <div class="blog-footer">
+                <span class="blog-date">Date Started: Sept 20, 2025</span>
+                <span class="blog-date">Date Finished/Published: Sept ??, 2025</span>
+                <a href="information/YCE.html" class="read-btn">Read More</a>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Return Button -->
+    <a href="index.html" class="return-btn" aria-label="Return to main" title="Return to main">
+        <span class="icon">←</span>
+        <span class="label">Return?</span>
+    </a>
+
+    <!-- JS at bottom for cleaner DOM handling -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.return-btn').forEach(function (btn) {
+                btn.addEventListener('click', function (e) {
+                    var rect = this.getBoundingClientRect();
+                    var x = (e.clientX || (e.touches && e.touches[0].clientX)) - rect.left;
+                    var y = (e.clientY || (e.touches && e.touches[0].clientY)) - rect.top;
+                    var ripple = document.createElement('span');
+                    ripple.className = 'ripple';
+                    ripple.style.left = x + 'px';
+                    ripple.style.top = y + 'px';
+                    this.appendChild(ripple);
+                    setTimeout(() => ripple.remove(), 700);
+
+                    e.preventDefault();
+                    if (history.length > 1) {
+                        history.back();
+                    } else {
+                        window.location.href = this.getAttribute('href');
+                    }
+                });
+
+                btn.addEventListener('keydown', function (e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        this.click();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
+<footer class="site-footer">
+    <img src="/resources/images/v4r.png" alt="Site Logo">
+    <p>© 2025 V3R Development Team</p>
+</footer>

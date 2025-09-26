@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- HTML Meta Tags -->
+    <title>YCE</title>
+    <meta name="description" content="An informational, static, all-in-one website by V3R Development Team.">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property=" og:url" content="https://v3rdevelopmentteam.github.io/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Neoflare">
+    <meta property="og:description" content="An informational, static, all-in-one website by V3R Development Team.">
+    <meta property=" og:image" content="https://v3rdevelopmentteam.github.io/resources/images/FLAMESRISEN.png">
+    <!-- Load error, please check URL -->
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="twitter:domain" content="v3rdevelopmentteam.github.io">
+    <meta property="twitter:url" content="https://v3rdevelopmentteam.github.io/">
+    <meta name="twitter:title" content="Neoflare">
+    <meta name="twitter:description" content="An informational, static, all-in-one website by V3R Development Team.">
+    <meta name=" twitter:image" content="https://v3rdevelopmentteam.github.io/resources/images/FLAMESRISEN.png">
+
+
+
+
+    <style>
+        body {
+            font-family: "Outfit", sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            background: #0d0d0d;
+            color: #e5e5e5;
+        }
+
+        header {
+            background-image: url('/resources/images/FLAMESRISEN.png');
+            background-size: cover;
+            background-position: center;
+            color: #ffffff;
+            padding: 4rem 1rem;
+            text-align: center;
+            border-bottom: 1px solid #222;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.72);
+            z-index: 0;
+        }
+
+        header * {
+            position: relative;
+            z-index: 1;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 3rem;
+            letter-spacing: 1px;
+        }
+
+        header p {
+            margin-top: 1rem;
+            font-size: 1.2rem;
+            color: #ccc;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        main h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        main p {
+            margin: 1.6rem 0;
+            font-size: 1.05rem;
+            color: #ddd;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease;
+        }
+
+        /* active state when visible */
+        main p.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* fade-out at top and bottom edges */
+        body::before,
+        body::after {
+            content: "";
+            position: fixed;
+            left: 0;
+            right: 0;
+            height: 100px;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        body::before {
+            top: 0;
+            background: linear-gradient(to bottom, #0d0d0d, transparent);
+        }
+
+        body::after {
+            bottom: 0;
+            background: linear-gradient(to top, #0d0d0d, transparent);
+        }
+
+        .site-footer {
+            background: #0d0d0d;
+            padding: 40px 20px 20px;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .site-footer p {
+            font-size: 13px;
+            color: #777;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>🔥 Flames Risen</h1>
+        <p>A creative corner for stories, ideas, and inspiration.</p>
+    </header>
+
+    <main>
+        <h2>The Spark of Creation</h2>
+        <p>
+            Inspiration often begins quietly. A single thought, a fleeting memory, or an
+            unexpected encounter can grow into an idea powerful enough to shape entire
+            projects. In the journey of creating, every spark matters, and every step
+            tells a story.
+        </p>
+        <p>
+            Flames Risen was born from these sparks — small but steady bursts of creativity
+            that come together to build something greater. Through reflections, writing,
+            and storytelling, this space explores the beauty of crafting meaning from
+            imagination.
+        </p>
+        <p>
+            Like fire, ideas rise when given breath. They shift, spread, and transform,
+            not always predictable, but always carrying warmth and light. This blog is
+            a collection of those flames — stories that inspire, thoughts that linger,
+            and moments worth remembering.
+        </p>
+        <p>
+            Inspiration often begins quietly. A single thought, a fleeting memory, or an
+            unexpected encounter can grow into an idea powerful enough to shape entire
+            projects. In the journey of creating, every spark matters, and every step
+            tells a story.
+        </p>
+        <p>
+            Flames Risen was born from these sparks — small but steady bursts of creativity
+            that come together to build something greater. Through reflections, writing,
+            and storytelling, this space explores the beauty of crafting meaning from
+            imagination.
+        </p>
+        <p>
+            Like fire, ideas rise when given breath. They shift, spread, and transform,
+            not always predictable, but always carrying warmth and light. This blog is
+            a collection of those flames — stories that inspire, thoughts that linger,
+            and moments worth remembering.
+        </p>
+        <p>
+            Inspiration often begins quietly. A single thought, a fleeting memory, or an
+            unexpected encounter can grow into an idea powerful enough to shape entire
+            projects. In the journey of creating, every spark matters, and every step
+            tells a story.
+        </p>
+        <p>
+            Flames Risen was born from these sparks — small but steady bursts of creativity
+            that come together to build something greater. Through reflections, writing,
+            and storytelling, this space explores the beauty of crafting meaning from
+            imagination.
+        </p>
+        <p>
+            Like fire, ideas rise when given breath. They shift, spread, and transform,
+            not always predictable, but always carrying warmth and light. This blog is
+            a collection of those flames — stories that inspire, thoughts that linger,
+            and moments worth remembering.
+        </p>
+        <h2>The Spark of Creation</h2>
+        <p>
+            Inspiration often begins quietly. A single thought, a fleeting memory, or an
+            unexpected encounter can grow into an idea powerful enough to shape entire
+            projects. In the journey of creating, every spark matters, and every step
+            tells a story.
+        </p>
+        <p>
+            Flames Risen was born from these sparks — small but steady bursts of creativity
+            that come together to build something greater. Through reflections, writing,
+            and storytelling, this space explores the beauty of crafting meaning from
+            imagination.
+        </p>
+        <p>
+            Like fire, ideas rise when given breath. They shift, spread, and transform,
+            not always predictable, but always carrying warmth and light. This blog is
+            a collection of those flames — stories that inspire, thoughts that linger,
+            and moments worth remembering.
+        </p>
+    </main>
+
+    <footer class="site-footer">
+        <p>© 2025 Flames Risen. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                } else {
+                    entry.target.classList.remove("visible"); // fade away when leaving
+                }
+            });
+        }, { threshold: 0.2 });
+
+        document.querySelectorAll("main p").forEach(p => observer.observe(p));
+    </script>
+</body>
+
+</html>
