@@ -4,101 +4,424 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Neoflare — Blog Intro</title>
+    <!-- HTML Meta Tags -->
+    <title>YCE</title>
+    <meta name="description" content="An informational, static, all-in-one website by V3R Development Team.">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property=" og:url" content="https://v3rdevelopmentteam.github.io/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Neoflare">
+    <meta property="og:description" content="An informational, static, all-in-one website by V3R Development Team.">
+    <meta property=" og:image" content="https://v3rdevelopmentteam.github.io/resources/images/FLAMESRISEN.png">
+    <!-- Load error, please check URL -->
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="twitter:domain" content="v3rdevelopmentteam.github.io">
+    <meta property="twitter:url" content="https://v3rdevelopmentteam.github.io/">
+    <meta name="twitter:title" content="Neoflare">
+    <meta name="twitter:description" content="An informational, static, all-in-one website by V3R Development Team.">
+    <meta name=" twitter:image" content="https://v3rdevelopmentteam.github.io/resources/images/FLAMESRISEN.png">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="/resources/TNFP/favicon.ico">
-    <link rel="stylesheet" href="blogstyle.css">
+
+    <style>
+        body {
+            font-family: "Outfit", sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            background: #0d0d0d;
+            color: #e5e5e5;
+        }
+
+        header {
+            background-image: url('/resources/images/FLAMESRISEN.png');
+            background-size: cover;
+            background-position: center;
+            color: #ffffff;
+            padding: 4rem 1rem;
+            text-align: center;
+            border-bottom: 1px solid #222;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.72);
+            z-index: 0;
+        }
+
+        header * {
+            position: relative;
+            z-index: 1;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 3rem;
+            letter-spacing: 1px;
+        }
+
+        header p {
+            margin-top: 1rem;
+            font-size: 1.2rem;
+            color: #ccc;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        main h2,
+        main h3,
+        main p {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease;
+        }
+
+        main h2.visible,
+        main h3.visible,
+        main p.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        main h2 {
+            font-size: 2rem;
+            margin: 2.5rem 0 1rem;
+            color: #fff;
+        }
+
+        main h3 {
+            font-size: 1.4rem;
+            margin: 2rem 0 1rem;
+            color: #ddd;
+        }
+
+        main p {
+            margin: 1.6rem 0;
+            font-size: 1.05rem;
+            color: #ddd;
+        }
+
+        /* fade edges */
+        body::before,
+        body::after {
+            content: "";
+            position: fixed;
+            left: 0;
+            right: 0;
+            height: 100px;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        body::before {
+            top: 0;
+            background: linear-gradient(to bottom, #0d0d0d, transparent);
+        }
+
+        body::after {
+            bottom: 0;
+            background: linear-gradient(to top, #0d0d0d, transparent);
+        }
+
+        /* Return Button */
+        /* Return button (bottom-left, centered arrow, expanding pill + ripple) */
+        .return-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50px;
+            background: rgba(20, 20, 20, 0.85);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6);
+            overflow: hidden;
+            cursor: pointer;
+            z-index: 1000;
+            transition: width 0.35s cubic-bezier(.2, .9, .2, 1), background 0.35s ease, box-shadow 0.35s ease;
+            text-decoration: none;
+            /* if it's an anchor */
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* focus ring for accessibility */
+        .return-btn:focus {
+            outline: none;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6), 0 0 0 4px rgba(76, 158, 255, 0.08);
+        }
+
+        /* collapsed: center the arrow */
+        .return-btn .icon {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 20px;
+            line-height: 1;
+            color: #fff;
+            transition: left 0.35s cubic-bezier(.2, .9, .2, 1), transform 0.35s cubic-bezier(.2, .9, .2, 1);
+            pointer-events: none;
+        }
+
+        /* label (hidden until expanded) */
+        .return-btn .label {
+            position: absolute;
+            left: 66px;
+            /* location of label when expanded */
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0;
+            color: #ddd;
+            font-weight: 700;
+            font-size: 15px;
+            white-space: nowrap;
+            transition: opacity 0.25s ease;
+            pointer-events: none;
+        }
+
+        /* expanded state on hover or focus */
+        .return-btn:hover,
+        .return-btn:focus {
+            width: 140px;
+            background: rgba(40, 40, 40, 0.95);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.8);
+        }
+
+        /* when expanded, move icon to left padding and reveal label */
+        .return-btn:hover .icon,
+        .return-btn:focus .icon {
+            left: 18px;
+            transform: translate(0, -50%);
+        }
+
+        .return-btn:hover .label,
+        .return-btn:focus .label {
+            opacity: 1;
+        }
+
+        /* ripple effect element */
+        .return-btn .ripple {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.12);
+            transform: translate(-50%, -50%) scale(0);
+            pointer-events: none;
+            animation: ripple-effect 600ms cubic-bezier(.2, .9, .2, 1);
+        }
+
+        /* Footer styling */
+        .site-footer {
+            background: #0d0d0d;
+            padding: 40px 20px 20px;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .site-footer img {
+            max-width: 120px;
+            margin-bottom: 12px;
+        }
+
+        .site-footer p {
+            font-size: 13px;
+            color: #777;
+        }
+    </style>
 </head>
 
 <body>
     <header>
-        <h1 style="text-align:center; color:white; margin-top:20px;">V3R Developer's Blog Posts</h1>
-        <p style="text-align:center; color:#aaa;">Our thoughts, stories, passion, imagination, and ideas. Our outcry,
-            feelings, and voices.</p>
-        <p style="text-align:center; color:#aaa;">All blog posts are formally checked, and ensured that no blog posts
-            are not destroying each other's images, by not directly or mentioning,
+        <h1>YCE</h1>
+        <p>YCE, 3 persons, one action. Shaped Ray's Idea, The Story of Neutra Lore, and the vision.</p>
+        <p>How and why, and why is it controversial?</p>
 
-        </p>
-        <p>
-            with/without personal information or secrets between each other.
-        </p>
     </header>
 
     <main>
-        <!-- YCE-->
-        <div class="blog-card">
-            <div class="blog-header" style="background-image: url(/resources/images/NDHQ.png)">
-                <span class="blog-author">by Ray JL</span>
-                <h3>YCE - Why it became a controversial?</h3>
-                <p>IRL (In Real Life) || </p>
-            </div>
-            <div class="blog-body">
-                <p>The ‘YCE’ is what shaped the ideas and the development of The Luminous Project, alternatively known
-                    as "Neutra Lore."
-                </p>
-                <p>
-                    ‘YCE’, however, isn't a simple concept nor idea of what we think of. Before ‘YCE’, It started with
-                    ‘Y’, its roots began all the way
-                </p>
-                <p>from earliest development days of Neutra Lore,
-                    before the V3R Development Team was formed. Then another 2 changed and the vision. </p>
-                <p>|</p>
-                <p>Click 'Read More' to see the full blog post.
-                </p>
-            </div>
-            <div class="blog-footer">
-                <span class="blog-date">Date Started: Sept 20, 2025</span>
-                <span class="blog-date">Date Finished/Published: Sept ??, 2025</span>
-                <a href="https://v3rdevelopmentteam.github.io/blog/information/YCE" class="read-btn">Read More</a>
-            </div>
-        </div>
+        <h2>Introduction</h2>
+        <p>
+            The ‘YCE’ is what shaped the ideas and the development of The Luminous Project, alternatively known as
+            "Neutra Lore."
+        </p>
+        <p>
+            ‘YCE’, however, isn't a simple concept or idea of what we think of. Before ‘YCE’, it started with ‘Y’; its
+            roots began all the way from the earliest development days of Neutra Lore,
+            before the V3R Development Team was formed. Then, another two changed, and the vision.
+        </p>
+        <p>
+            An idea of "three person, three uniqueness", after I realized, and became a source, contributed (directly or
+            indirectly), driven to create new ideas, inspirations, and development.
+            Yet, inspiration often comes with controversial topics, specifically a common topic called "shipping". What
+            began as inspiration, admiration, and influence turned into misunderstandings,
+            questions, debates about its meanings, and intentions.
+        </p>
+        <p>
+            In this blog post, we will be uncovering the history and intentions behind “Y,” “C,” and “E,” why they are
+            important, what my opinion is on them, and how their influence continues throughout the developing journey.
+        </p>
+        <h2>How and Why</h2>
+        <p>
+            One of them has their own characters on Neutra Lore: "Sha Gajiko", "Jun Cess Anseonjin", and "Eliza
+            Igancia". Not their names, but taken from the Neutra Lore Characters, which are connected to them. The
+            reason why I chose or admire them is because of one action that caused a change in Ray's Idea and
+            Development. Not something we all think of, but rather inspiration and compassion.
+        </p>
+        <p>
+            ‘Y’, the FIRST person who shaped Ray's Idea of making Neutra Lore with one character. ‘C’, the SECOND person
+            who admired the projects, which was named NSD:TC to NSD Anseonjin Training Center (ATC), and leading up to
+            the creation of Project: Liwanag, which is formerly known as DNA-PC, an ongoing project of the core game.
+            ‘E’, the THIRD person, in a swift replacement, I decided to make ‘E’ the 3rd because of potential problems
+            that may arise about ‘C’. Also a friend, but on the other side. One message I stumbled upon back then, when
+            no one said 'hi.' Then "E" replied, "hello." Somehow, out of nowhere, this led to the creation of the
+            Quality of Life (QoL) Project, and so on.
+        </p>
+        <p>
+            During the development days of The Luminous Project, Neutra Lore (Take 1). The part where I need to come up
+            with a new character, such as Ray, Ethan, and so on, that idea struck me when I was playing. A joke
+            character that I made back then turned into a character for Neutra Lore. Though I felt that it’s not right
+            to take its name, every time I make a character or come up with names, I do. So I decided to make changes to
+            avoid directly mentioning or involving its name outright. Since the characters had no feelings or
+            personality (unless given) at all, it is based on personality or behavior. It still doesn’t feel right, but
+            it passed through checks, ensuring it is not directly.
 
+        </p>
+        <p>
+            As stated in the blog post rules, be mindful of personal information and secrets between each other!
+            I respect their privacy, and you should respect yours too. Since they weren’t aware of The Luminous Project,
+            I made it because of an idea, instead of being bored sometimes, and burnout from the tasks. A story that is
+            really based on Ray JL’s life and then to the world's problems, but in a different dimension or universe.
+        </p>
+        <p>
+            A kind of something that writers wanted in their lives, but didn’t achieve when they were young.
+        </p>
+        <p>A mix of genres in one project or a story. Maybe preferably, mostly all. Take 1 was really hard, actually,
+            since you had to correct them all. Take 2 was fine, but a bit of a problem. Take 3 is what we’re going to
+            solve with Take 1 and Take 2 of the Neutra Lore problem, and make it clear to an audience without knowing
+            it. Learning from mistakes, determining the audience, the community, and so on.
+        </p>
+        <h2>Why is it controversial or issue?</h2>
+        <p>
+            We’re here with names that have issues, and that’s a risk I’ve thought about. The danger of silence, though,
+            was greater. Rumors grew because I didn’t explain, and without clarity, people filled the gaps with their
+            own assumptions.
+
+        </p>
+        <p>
+            My goal isn’t to spread those misunderstandings but to face them directly and then shift the focus to what
+            “YCE” truly stands for—inspiration, not rumor. I don’t want the blog to revolve around negativity; most of
+            it documents their positive impact on projects, with only a section dedicated to clearing up misconceptions
+            for closure.
+        </p>
+        <p>
+            That’s why I avoid using their real names and instead transform their presence into characters, traits, or
+            contributions. I’m not trying to “own” their actions or put them under a spotlight—it’s about recognizing
+            the moments of inspiration that redirected my path. If any of them ever felt uncomfortable, I would respect
+            that fully, because the purpose has never been to expose but to honor.
+        </p>
+        <p>Consent matters, which is why I frame “YCE” less as individual identities and more as the roles they played
+            in shaping creativity. What they sparked in me lives on in the projects, not as a spotlight on them
+            personally.
+        </p>
+        <p>There are also tangible milestones tied to their influence. “C” inspired the naming shift from NSD:TC to
+            Anseonjin Training Center, also directly shaped Project: Liwanag’s direction. “Y” sparked the very first
+            character concepts that evolved into Neutra Lore. “E”, through something as simple as replying “hello,” set
+            off a chain that gave birth to the Quality of Life project. These aren’t imagined connections—they are
+            traceable points in the timeline of my work. </p>
+        <p>At the same time, I acknowledge that inspiration is partly subjective. Legacy, however, isn’t built on
+            objectivity or personal meaning alone; it’s the intersection of both. For me, “YCE” is that meeting point.
+            The hardest part is knowing I can’t control how others interpret what I write, and I accept that
+            misunderstandings may still arise. But this defense is the moment I draw a line between inspiration and
+            rumor. My role is to set the record straight now so that the foundation isn’t misunderstood, and then let
+            the projects stand on their own strength.</p>
+        <p>Neutra Lore, the games, the stories—these will carry the legacy forward without the need for constant
+            explanations. Inspiration should outlast controversy, and that is what I want “YCE” to be remembered for.
+        </p>
+        <p>If future readers find this blog post, and you know the meaning, the history, and so on.
+            I want them to see that the record was set straight early on—that inspiration, not rumor, was the truth from
+            the start. The safeguard is in the way I continue building. Neutra Lore, Project: Liwanag, and the rest of
+            V3R’s work will be documented and shared on their own terms, with this defense being only one piece in a
+            much larger body of history. Future readers won’t just see “YCE” tied to rumors—they’ll see “YCE” tied to
+            creative milestones. The blog is structured so the focus remains on creativity, with the clarification as
+            context, not centerpiece. In the long run, the projects themselves will overshadow the controversy, because
+            they are the real evidence of what “YCE” stood for. This post is a bridge, not the destination—it closes one
+            chapter so the work can speak louder than speculation. I see “YCE” not as a permanent label tied to
+            individuals, but as a role they played in shaping creativity. It's important to make that balance explicit.
+            The facts are there—naming changes, project directions, even the timing of small exchanges that sparked big
+            outcomes. But what makes them meaningful is how I interpreted them.
+        </p>
+        <p>First, started with one work shared for ‘E’, to show the new project’s name, yet it created the rumor
+            involving an unexpected return, which is the misunderstandings and confusion between Ray and ‘E’. Before the
+            rumor started, on January 20, 2025. I said to my friend, Ethan. If he can direct-message ‘E’ about a new
+            subproject, in which he accepted it. And I also agreed to tell that it was from me. On January 23, 2025,
+            during a normal conversation with my friend, Ethan.
+            We started explaining some topics related to personal and such, and I have been informed that the other
+            section in my class, with the new project codenamed "Ignacio", I sent for ‘E’ to view. The story was about
+            debating and turned into a court session (although it's not) as Ethan explained, and made it clear. Then on
+            February 9, 2025. I handed ‘E’ the V3R Development Team's Pilot Testing / GEN 1 Lanyard, along with the
+            letter. “Adding another layer for defense.”</p>
+        <p>The second and preferred ‘last’, ‘Y’. Recently, the ‘YCE’ became an issue again, which forced me to create
+            this defense/blog post to make things clear and make things right. This situation is similar to ‘E’ rumors,
+            but it's different. It's about right and wrong, and explanation, in which this time it's about her. It’s the
+            battle for the RIGHT, and spotting the WRONG.
+        </p>
+        <p>These problems became controversial for two persons, except "Jun", who appreciated it.
+            As she understands and acknowledges the project ongoing by the V3R Development Team.
+            The reason why it became controversial for me is because of misunderstanding and misinformation about
+            relationships, alternatively known as a ‘crush’.
+        </p>
+        <h2>Conclusion</h2>
+        <p>It is about recognizing them, whose presence, whether through an action, a message, or appreciation, changed
+            the course of Neutra Lore and the vision. The meaning of “YCE” is not just 3 persons, but the personalities
+            or traits that became sources of inspiration, not about assumptions of relationships. Their influence
+            continues to be recognized in the projects and games we have created.</p>
+        <p>A battle for the right, spotting the wrong.</p>
+
+        <p>By Ray JL, Director of V3R Development Team</p>
+        <p>D.B: 09/22/25</p>
+        <p>D.F: 09/26/25</p>
     </main>
 
     <!-- Return Button -->
-    <a href="https://v3rdevelopmentteam.github.io/" class="return-btn" aria-label="Return to main" title="Return to main">
+    <a href="https://v3rdevelopmentteam.github.io/blog/introduction" class="return-btn" aria-label="Return to main"
+        title="Return to main">
         <span class="icon">←</span>
         <span class="label">Return?</span>
     </a>
 
-    <!-- JS at bottom for cleaner DOM handling -->
+    <footer class="site-footer">
+        <img src="/resources/images/v4r.png" alt="Site Logo">
+        <p>© 2025 V3R Development Team</p>
+    </footer>
+
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            document.querySelectorAll('.return-btn').forEach(function (btn) {
-                btn.addEventListener('click', function (e) {
-                    var rect = this.getBoundingClientRect();
-                    var x = (e.clientX || (e.touches && e.touches[0].clientX)) - rect.left;
-                    var y = (e.clientY || (e.touches && e.touches[0].clientY)) - rect.top;
-                    var ripple = document.createElement('span');
-                    ripple.className = 'ripple';
-                    ripple.style.left = x + 'px';
-                    ripple.style.top = y + 'px';
-                    this.appendChild(ripple);
-                    setTimeout(() => ripple.remove(), 700);
-
-                    e.preventDefault();
-                    if (history.length > 1) {
-                        history.back();
-                    } else {
-                        window.location.href = this.getAttribute('href');
-                    }
-                });
-
-                btn.addEventListener('keydown', function (e) {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        this.click();
-                    }
-                });
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                } else {
+                    entry.target.classList.remove("visible"); // fade away when leaving
+                }
             });
-        });
+        }, { threshold: 0.2 });
+
+        document.querySelectorAll("main h2, main h3, main p").forEach(el => observer.observe(el));
     </script>
 </body>
 
 </html>
-<footer class="site-footer">
-    <img src="/resources/images/v4r.png" alt="Site Logo">
-    <p>© 2025 V3R Development Team</p>
-</footer>
