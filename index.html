@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#050506" />
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
 
     <!-- HTML Meta Tags -->
@@ -53,18 +54,23 @@
     <!-- Mobile Version -->
     <header class="topbar-mobile">
         <img src="resources/images/v4r.png" alt="V3R Logo" class="logo-mobile">
-        <div class="nav-mobile">
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileNav">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <nav class="nav-mobile" id="mobileNav">
             <a href="https://v3rdevelopmentteam.github.io/">Home</a>
             <a href="https://v3rdevelopmentteam.github.io/project">Project</a>
             <a href="https://v3rdevelopmentteam.github.io/blog/introduction">Blogs</a>
             <a href="https://v3rdevelopmentteam.github.io/about">About</a>
-        </div>
+        </nav>
     </header>
 
 
     <!-- Box 1 -->
     <section id="box1" class="hidden">
-        <video autoplay muted loop>
+        <video autoplay muted loop playsinline>
             <source src="resources/Introduction.mp4" type="video/mp4">
         </video>
         <div class="countdown-container">
@@ -117,6 +123,13 @@
             <div class="fade-slide">
                 <img src="resources/images/NEOFLARETHUMBNAIL.png">
             </div>
+            <div class="slide-dots" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
         <p>Became history.</p>
     </section>
@@ -143,12 +156,24 @@
             hiddenElements.forEach(el => observer.observe(el));
         });
 
-        const menuToggle = document.querySelector('.menu-toggle');
+        const menuToggle = document.getElementById('menuToggle');
         const mobileNav = document.getElementById('mobileNav');
 
-        menuToggle.addEventListener('click', () => {
-            mobileNav.style.display = mobileNav.style.display === 'flex' ? 'none' : 'flex';
-        });
+        if (menuToggle && mobileNav) {
+            menuToggle.addEventListener('click', () => {
+                const isOpen = mobileNav.classList.toggle('open');
+                menuToggle.classList.toggle('open', isOpen);
+                menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            });
+
+            document.addEventListener('click', (event) => {
+                if (!mobileNav.classList.contains('open')) return;
+                if (mobileNav.contains(event.target) || menuToggle.contains(event.target)) return;
+                mobileNav.classList.remove('open');
+                menuToggle.classList.remove('open');
+                menuToggle.setAttribute('aria-expanded', 'false');
+            });
+        }
 
         // Countdown Timer
         function countdownTimer() {
@@ -178,14 +203,3 @@
 
 
 </html>
-
-
-
-
-
-
-
-
-
-
-
