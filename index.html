@@ -1,204 +1,494 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
+<!-- Head -->
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#050506" />
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
 
-    <!-- HTML Meta Tags -->
-    <title>Neoflare</title>
-    <meta name="description" content="An informational, static, all-in-one website by V3R Development Team.">
-    
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:url" content="https://v3rdevelopmentteam.github.io/">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Neoflare">
-    <meta property="og:description" content="An informational, static, all-in-one website by V3R Development Team.">
-    <meta property="og:image" content="https://v3rdevelopmentteam.github.io/resources/images/FLAMESRISEN.png">
-    <meta property="og:image:width" content="1920">
-    <meta property="og:image:height" content="1080">
 
-    <!-- Twitter Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta property="twitter:domain" content="v3rdevelopmentteam.github.io">
-    <meta property="twitter:url" content="https://v3rdevelopmentteam.github.io/">
-    <meta name="twitter:title" content="Neoflare">
-    <meta name="twitter:description" content="An informational, static, all-in-one website by V3R Development Team.">
-    <meta name="twitter:image" content="https://v3rdevelopmentteam.github.io/resources/images/FLAMESRISEN.png">
+<!-- Primary SEO -->
+<meta name="title" content="Neoflare | V3R">
+<meta name="description" content="Neoflare | Bringing V3R onto the light, shining on imagination than ever before.">
 
+<!-- Open Graph / Facebook / Messenger / Discord -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Neoflare | V3R">
+<meta property="og:description" content="Neoflare | Bringing V3R onto the light, shining on imagination than ever before.">
+<meta property="og:url" content="https://raysmultimedia.github.io/">
+<meta property="og:site_name" content="Ray's Multimedia">
+<meta property="og:image" content="https://raysmultimedia.github.io/resources/images/bg7.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Neoflare | V3R">
+
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Neoflare | V3R">
+<meta name="twitter:description" content="Neoflare | Bringing V3R onto the light, shining on imagination than ever before.">
+<meta name="twitter:image" content="https://raysmultimedia.github.io/resources/images/bg7.jpg">
+
+
+    <!-- Google Fonts API -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/png" href="resources/TNFP/favicon.ico">
-    <link rel="stylesheet" href="style.css">
+    <!-- External Files -->
+    <link rel="stylesheet" href="Stylesheet1.css">
+    <link rel="stylesheet" href="LoadingDesign.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="resources/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="resources/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="resources/favicon/favicon-16x16.png">
+    <link rel="manifest" href="resources/favicon/site.webmanifest">
+
+    <audio id="Imaginative" autoplay loop preload="auto">
+    <source src="resources/audio/Imaginative.wav" type="audio/wav">
+    Your browser does not support the audio element.
+    </audio>
+
+    <!-- HTML -->
+    <title>The Neoflare Project | by V3R</title>
+
 </head>
 
+<div id="loading-screen">
+    <div class="loader">
+        <div class="loader-square"></div>
+        <div class="loader-square"></div>
+        <div class="loader-square"></div>
+        <div class="loader-square"></div>
+        <div class="loader-square"></div>
+        <div class="loader-square"></div>
+        <div class="loader-square"></div>
+    </div>
+</div>
+
+<script>
+window.addEventListener("load", function () {
+
+    const loadingScreen = document.getElementById("loading-screen");
+
+    // Wait 1 second after all resources have loaded
+    setTimeout(function () {
+        loadingScreen.classList.add("hidden");
+    }, 2000);
+
+});
+</script>
+
+<!-- Body -->
 <body>
-    <!-- PC Version -->
-    <header class="topbar-pc">
-        <div class="nav-pc">
-            <div class="nav-buttons">
-            <a href="https://v3rdevelopmentteam.github.io/">Home</a>
-            <a href="https://v3rdevelopmentteam.github.io/project">Project</a>
-            </div>
-            <img src="resources/images/v4r.png" alt="V3R Logo" class="logo-pc">
-            <div class="nav-buttons">
-            <a href="https://v3rdevelopmentteam.github.io/blog/introduction">Blogs</a>
-            <a href="https://v3rdevelopmentteam.github.io/about">About</a>
-            </div>
-        </div>
-    </header>
-
-    <!-- Mobile Version -->
-    <header class="topbar-mobile">
-        <img src="resources/images/v4r.png" alt="V3R Logo" class="logo-mobile">
-        <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileNav">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-        <nav class="nav-mobile" id="mobileNav">
-            <a href="https://v3rdevelopmentteam.github.io/">Home</a>
-            <a href="https://v3rdevelopmentteam.github.io/project">Project</a>
-            <a href="https://v3rdevelopmentteam.github.io/blog/introduction">Blogs</a>
-            <a href="https://v3rdevelopmentteam.github.io/about">About</a>
-        </nav>
-    </header>
-
 
     <!-- Box 1 -->
-    <section id="box1" class="hidden">
-        <video autoplay muted loop playsinline>
-            <source src="resources/Introduction.mp4" type="video/mp4">
+    <section id="home" class="hidden show">
+
+        <video class="background-video" autoplay muted loop playsinline>
+            <source src="resources/videos/Intro.mp4" type="video/mp4">
         </video>
-        <div class="countdown-container">
-            <img src="resources/images/tNFp.png">
-            <h2>The Neoflare Project</h2>
-            <div id="countdown" class="countdown"></div>
-            <p>This site is under maintenance. Powered by GitHub Pages.</p>
-        </div>
-    </section>
-
-    <!-- Box 2 -->
-    <section id="box2" class="hidden">
-        <div>
-            <h1>About Our Work</h1>
-            <p>At V3R Development Team, we create games enjoyable for players. Not just players, but friends and family.
-                We're not just a development team basing on one language, </p>
-            <p>
-                we're making it even more. Our website, stories, projects, and such more.</p>
-        </div>
-    </section>
-
-    <!-- Box 3 -->
-    <section id="box3" class="hidden">
-        <img src="resources/images/VARIANTTHUMBNAIL.png" alt="V3R Product Preview">
-        <div class="text">
-            <h1>Variant</h1>
-            <p>Variant, a V3R Development Team Fandom. For people, enthuasist or fans that are interested in our work!
-                Not only for fans, but the people who have different talent like us! // Implementation will be coming
-                soon.
-            </p>
-        </div>
+        <img class="theme-image" src="resources/images/Neoflare.png" alt="Ray's Multimedia Logo">
+        <h1 class="title">The Neoflare Project</h1>
+        <p>Hello, and Welcome to our Neoflare!</p>
+        <h3>We are bringing V3R onto the spotlight, shining on imagination than ever before.</h3>
+        <p>
+        Happy 2nd Anniversary, V3R Development Team.
+        </p>
+        <p>
+        Our Message For This Anniversary, This Year.
+        </p>
+        <h4>Going Forward, We Reflect Our Imagination.</h4>
 
     </section>
 
-    <section id="box4" class="hidden">
-        <p> The rest.</p>
-        <div class="slideshow-container">
-            <div class="fade-slide">
-                <img src="resources/images/NSDATC.png">
+<!-- Box 2 -->
+<section id="about" class="hidden show">
+
+    <video class="background-video" autoplay muted loop playsinline>
+        <source src="resources/videos/House.mp4" type="video/mp4">
+    </video>
+
+    <div class="countdown-container">
+
+        <img src="resources/images/v3rcircle.png" alt="V3R Development Team Logo">
+
+        <span class="about-label">WHO WE ARE</span>
+
+        <h2>V3R DEVELOPMENT TEAM</h2>
+        <p>
+            Founded on November 7, 2024 by Ray (@rays_multimedia) and brought along with Ethan (@EthanFox17)
+        </p>
+        <p>
+            An indie development team, driven by Passion and Imagination in creating games, animating, interactive experience, and more.
+        </p>
+        <p>
+            We primarily build, script, and animate on ROBLOX, and some other programming such as websites and other side projects.
+        </p>
+        <p>
+           The development team is composed entirely of close friends (handpicked), who share a passion on imagining and creating ideas into innovation, and support one another throughout their journey.
+        </p>
+        <p>
+        </p>
+        <h3>Our Motto</h3>
+
+        <span class="about-footer">
+            Passion. Imagination. Innovation.
+        </span>
+
+    </div>
+
+
+
+</section>
+
+
+<!-- Box 3 - Developers -->
+
+<section id="developers" class="hidden show">
+
+    <video class="background-video" autoplay muted loop playsinline>
+        <source src="resources/videos/Desktop.mp4" type="video/mp4">
+    </video>
+
+    <div class="developers-container">
+
+        <h1 class="title">Developers</h1>
+        <p>Meet the friends behind V3R Development Team.</p>
+
+        <div class="developers-info">
+
+            <!-- Developer 1: Ray -->
+            <div class="developer-card">
+
+                <div class="developer-image">
+                    <img id="youtube-image-1" src="resources/images/Ray.png" alt="Ray">
+                </div>
+
+                <div class="developer-details">
+                    <h2 id="youtube-name-1">A</h2>
+                    <h5 id="youtube-handle-1">A</h5>
+                    <span>Founder & Director</span>
+                    <h4>
+                    Skill Roles
+                    </h4>
+                    <p>
+                    Builder, Programmer, Animator, and Composer.
+                    </p>
+                    <h4>
+                    Notable Works
+                    </h4>
+                    <p>
+                    Founded V3R Development Team.
+                    </p>
+                    <p> 
+                    He is currently in making of his own solo project, The Sylrysa Project.
+                    </p>
+                    <h4>
+                    Short Description:
+                    </h4>
+                    <p>
+                        Spectre - 01
+                    </p>
+                </div>
             </div>
-            <div class="fade-slide">
-                <img src="resources/images/NDHQ.png">
+
+            <!-- Developer 2: Ethan -->
+            <div class="developer-card">
+
+                <div class="developer-image">
+                    <img id="youtube-image-2" src="resources/images/Ethan.png" alt="Ethan">
+                </div>
+
+                <div class="developer-details">
+                    <h2 id="youtube-name-2">A</h2>
+                    <h5 id="youtube-handle-2">A</h5>
+                    <span>Developer</span>
+                    <h4>
+                    Skill Roles
+                    </h4>
+                    <p>
+                    Builder, and Animator
+                    </p>
+                    <h4>
+                    Notable Works
+                    </h4>
+                    <p>
+                    Well-known by the community for his boss fight concept animation in Block Tales,
+                    featuring the notorious hacker in ROBLOX.
+                    </p>
+                    <p>
+                    He is currently in making of his own series, SENTIMENTALITY.
+                    </p>
+                    <h4>
+                    Short Description:
+                    </h4>
+                    <p> 
+                    cool
+                    </p>
+                </div>
+
             </div>
-            <div class="fade-slide">
-                <img src="resources/images/TLPTHUMBNAIL.png">
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- Box 4 -->
+<section id="games" class="hidden show">
+
+    <video class="background-video" autoplay muted loop playsinline>
+        <source src="resources/videos/Facility.mp4" type="video/mp4">
+    </video>
+
+    <div class="game-showcase">
+
+        <!-- PREVIOUS -->
+        <button class="game-arrow prev" aria-label="Previous game">
+            &#10094;
+        </button>
+
+        <!-- GAME SLIDER -->
+        <div class="game-scroll">
+
+            <!-- GAME 1 -->
+            <div class="game-card">
+
+                <div class="game-thumbnail"
+                     style="background-image: url('resources/images/silly.jpg');">
+
+                    <div class="game-overlay"></div>
+
+                    <div class="game-category">
+                        <span>ORIGINS</span>
+                        <span>WEBSITE & DEVELOPMENT</span>
+                    </div>
+
+                    <div class="game-information">
+
+                        <p class="game-label">FEATURED PROJECT</p>
+
+                        <h2>THE NEOFLARE PROJECT</h2>
+
+                        <p class="game-description">    
+                            meow. im gonna update these cards if i regain energy (not really.)
+                        </p>
+
+                        <a href="#games"
+                           class="game-disabled">
+                            Disabled <span>↗</span>
+                        </a>
+
+                    </div>
+                </div>
             </div>
-            <div class="fade-slide">
-                <img src="resources/images/DRF.png">
+
+            <!-- GAME 2 -->
+            <div class="game-card">
+
+                <div class="game-thumbnail"
+                     style="background-image: url('resources/images/silly.jpg');">
+
+                    <div class="game-overlay"></div>
+
+                    <div class="game-category">
+                        <span>ORIGINS</span>
+                        <span>SOLO PROJECT</span>
+                    </div>
+
+                    <div class="game-information">
+
+                        <p class="game-label">FEATURED GAME</p>
+
+                        <h2>THE SYLRYSA PROJECT</h2>
+
+                        <p class="game-description">    
+                            meow. im gonna update these cards if i regain energy (not really.)
+                        </p>
+
+                        <a href="#games"
+                           class="game-disabled">
+                            Disabled <span>↗</span>
+                        </a>
+
+                    </div>
+                </div>
             </div>
-            <div class="fade-slide">
-                <img src="resources/images/NEOFLARETHUMBNAIL.png">
-            </div>
-            <div class="slide-dots" aria-hidden="true">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
+
+            <!-- GAME 3 -->
+            <div class="game-card">
+
+                <div class="game-thumbnail"
+                     style="background-image: url('resources/images/silly.jpg');">
+
+                    <div class="game-overlay"></div>
+
+                    <div class="game-category">
+                        <span>ORIGINS</span>
+                        <span>SOCIALS</span>
+                    </div>
+
+                    <div class="game-information">
+
+                        <p class="game-label">FEATURED GAME</p>
+
+                        <h2>V3R DEVELOPMENT TEAM HEADQUARTERS</h2>
+
+                        <p class="game-description">    
+                            meow. im gonna update these cards if i regain energy (not really.)
+                        </p>
+                        
+                        <a href="#games"
+                           class="game-disabled">
+                            Disabled <span>↗</span>
+                        </a>
+
+                    </div>
+                </div>
             </div>
         </div>
-        <p>Became history.</p>
-    </section>
 
-    <script>
-        // Run after page load
-        document.addEventListener("DOMContentLoaded", () => {
-            const hiddenElements = document.querySelectorAll(".hidden");
+        <!-- NEXT -->
+        <button class="game-arrow next" aria-label="Next game">
+            &#10095;
+        </button>
 
-            // Option 1: Show immediately
-            hiddenElements.forEach(el => el.classList.add("show"));
+    </div>
 
-            // Option 2: Show only when scrolled into view
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add("show");
-                        observer.unobserve(entry.target); // animate only once
-                    }
-                });
-            }, { threshold: 0.2 });
-            countdownTimer();
+    <!-- PAGINATION -->
+    <div class="game-pagination"></div>
 
-            hiddenElements.forEach(el => observer.observe(el));
-        });
+</section>
 
-        const menuToggle = document.getElementById('menuToggle');
-        const mobileNav = document.getElementById('mobileNav');
+<!-- Box 6 -->
+<section id="socials" class="hidden show">
 
-        if (menuToggle && mobileNav) {
-            menuToggle.addEventListener('click', () => {
-                const isOpen = mobileNav.classList.toggle('open');
-                menuToggle.classList.toggle('open', isOpen);
-                menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-            });
+        <video class="background-video" autoplay muted loop playsinline>
+            <source src="resources/videos/17TH.mp4" type="video/mp4">
+        </video>
 
-            document.addEventListener('click', (event) => {
-                if (!mobileNav.classList.contains('open')) return;
-                if (mobileNav.contains(event.target) || menuToggle.contains(event.target)) return;
-                mobileNav.classList.remove('open');
-                menuToggle.classList.remove('open');
-                menuToggle.setAttribute('aria-expanded', 'false');
-            });
-        }
+    <div class="socials-container">
 
-        // Countdown Timer
-        function countdownTimer() {
-            const targetDate = new Date("September 5, 2025 18:00:00 GMT+8").getTime();
-            const countdownElement = document.getElementById("countdown");
+        <h1 class="title">Socials</h1>
+        <p>Follow or Subscribe to our official channels, V3R Development Team across platforms</p>
+        <p>to stay updated to every content or streams we upload!</p>
+<div class="socials-icons">
 
-            const interval = setInterval(function () {
-                const now = new Date().getTime();
-                const distance = targetDate - now;
+    <a href="https://www.facebook.com/v3rdevelopmentteam" class="social-link" aria-label="Facebook">
+        <img src="https://img.icons8.com/?size=100&id=118467&format=png&color=FFFFFF" alt="Facebook">
+    </a>
 
-                if (distance < 0) {
-                    clearInterval(interval);
-                    countdownElement.innerHTML = "Event Started!";
-                    return;
-                }
+    <a href="https://www.instagram.com/v3rdevelopmentteam/" class="social-link" aria-label="Instagram">
+        <img src="https://img.icons8.com/?size=100&id=ZOFC5nSr215Y&format=png&color=FFFFFF" alt="Instagram">
+    </a>
 
-                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    <a href="https://www.tiktok.com/@v3rdevelopmentteam" class="social-link" aria-label="TikTok">
+        <img src="https://img.icons8.com/?size=100&id=118638&format=png&color=FFFFFF" alt="TikTok">
+    </a>
 
-                countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-            }, 1000);
-        }
-    </script>
+    <a href="https://www.youtube.com/@V3RDevelopmentTeam" class="social-link" aria-label="YouTube">
+        <img src="https://img.icons8.com/?size=100&id=37326&format=png&color=FFFFFF" alt="YouTube">
+    </a>
+
+</div>
+
+    </div>
+
+</section>
+
+<!-- Box 7 -->
+<section id="communities" class="hidden show">
+
+        <video class="background-video" autoplay muted loop playsinline>
+            <source src="resources/videos/About.mp4" type="video/mp4">
+        </video>
+
+    <div class="communities-container">
+
+        <h1 class="title">Communities</h1>
+        <p>Join our communities, be part of our community or fans, "VARIANT."</p>
+<div class="communities-icons">
+
+    <a href="https://www.roblox.com/communities/35178059/V3R-Development-Team" class="social-link" aria-label="Roblox">
+        <img src="https://img.icons8.com/?size=100&id=97652&format=png&color=FFFFFF" alt="Roblox">
+    </a>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- Navigation Bar -->
+<nav class="navbar">
+
+    <span class="nav-indicator"></span>
+
+    <a href="#home" class="nav-btn active" data-label="Home">
+        <img src="https://img.icons8.com/?size=100&id=i6fZC6wuprSu&format=png&color=FFFFFF" alt="Home">
+    </a>
+
+    <a href="#about" class="nav-btn" data-label="About">
+        <img src="https://img.icons8.com/?size=100&id=21994&format=png&color=FFFFFF" alt="About">
+    </a>
+
+    <a href="#developers" class="nav-btn" data-label="Developers">
+        <img src="https://img.icons8.com/?size=100&id=111593&format=png&color=FFFFFF" alt="Developers">
+    </a>
+
+    <a href="#games" class="nav-btn" data-label="Projects">
+        <img src="https://img.icons8.com/?size=100&id=jM97zjbpG515&format=png&color=FFFFFF" alt="Projects">
+    </a>
+
+    <a href="#socials" class="nav-btn" data-label="Socials">
+        <img src="https://img.icons8.com/?size=100&id=qePzjQLJYgjF&format=png&color=FFFFFF" alt="Socials">
+    </a>
+
+    <a href="#communities" class="nav-btn" data-label="Communities">
+        <img src="https://img.icons8.com/?size=100&id=OyKIXQCNlJzy&format=png&color=FFFFFF" alt="Musics">
+    </a>
+    
+</nav>
+
+<div class="nav-tooltip"></div>
+
+<button id="audioToggle" class="audio-toggle" aria-label="Mute audio">
+    <img
+        id="audioIcon"
+        src="https://img.icons8.com/?size=100&id=iWO20ZvCeU53&format=png&color=FFFFFF"
+        alt="Audio playing"
+    >
+</button>
+
+<footer class="footer-centered" role="contentinfo">
+    <div class="footer-container">
+            <!-- Logo -->
+            <a class="footer-centered_seal">
+                <img src="resources/images/Neoflare.png" alt="Neoflare Seal">
+                <h5>The Neoflare Project</h5>
+            </a>
+
+  <div class="footer-copyright_1">
+    <h4>© 2026 V3R Development Team. All rights reserved.</h4>
+    <p>Original website design, code, graphics, and multimedia content are protected by copyright. Third-party assets remain the property of their respective owners.</p>
+    <p>Logo and Icons are retrieved from Icons8, assisted with AI in making of website (not including icons, audio, backgrounds, etc.), templates and other third-party search, provided, and assist.</p>
+       <p>Other trademarked logos, such as Youtube, Tiktok, etc. belongs to respective owners or company.</p>
+  </div>
+      <p>Last Updated: Nov 10, 2026</p>
+      <p>POWERED BY GITHUB PAGES</p>
+    </div>
+</footer>
+
+<!-- Navigation Scripts -->
+<script src="music.js"></script>
+<script src="ytchannelfetch.js"></script>
+<script src="background-slider.js"></script>
+<script src="navbar.js"></script>
+<script src="navbar-tooltip.js"></script>
+<script src="navbar-sound.js"></script>
+<script src="gamechanging.js"></script>
 </body>
 
 

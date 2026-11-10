@@ -1,0 +1,1943 @@
+/* ==========================================================================
+   STYLESHEET
+
+   01. Variables
+   02. Base
+   03. Keyframes
+   04. Shared section pattern (#home #about #developers #games #communities #socials)
+   05. Components
+       5.1  Theme image
+       5.2  Appearance controls
+       5.3  Navbar
+       5.4  Nav tooltip
+       5.5  Audio toggle
+       5.6  Background slider (#galleria)
+       5.7  Card carousel (generic .game-scroll / .game-card)
+       5.8  Project card
+       5.9  Footer
+   06. Sections
+       6.1  Home
+       6.2  About
+       6.3  Developers
+       6.4  Games
+       6.5  Communities + Socials
+   07. Responsive (1024 > 768 > 480 > 360 > landscape)
+   ========================================================================== */
+
+
+/* ==========================================================================
+   01. VARIABLES
+   ========================================================================== */
+
+:root {
+    color-scheme: dark;
+    font-family: "Outfit", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+
+    /* Theme (dark) */
+    --bg-color: rgb(10, 10, 10);
+    --text-color: rgb(255, 255, 255);
+    --surface-color: rgb(32, 32, 32);
+    --border-color: rgb(59, 59, 59);
+    --accent-color: rgb(164, 156, 255);
+
+    /* Brand */
+    --blue: rgb(14, 90, 255);
+    --green: #39ff87;
+
+    /* Glass panels */
+    --glass-bg: #ffffff21;
+    --glass-border: #ffffff;
+
+    /* Dock glass */
+    --dock-glass-bg: rgba(25, 25, 30, 0.55);
+    --dock-border: rgba(255, 255, 255, 0.15);
+    --dock-text: #ffffff;
+    --dock-shadow: rgba(0, 0, 0, 0.3);
+
+    /* Motion */
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-soft: cubic-bezier(0.22, 0.61, 0.36, 1);
+
+    /* Layout */
+    --radius-section: 12px;
+    --nav-clearance: 0px; /* extra bottom padding so the fixed navbar never covers content (raised on mobile) */
+
+    /* Blue hover tint used on every icon */
+    --icon-hover-filter: brightness(0) saturate(100%)
+                         invert(27%) sepia(98%) saturate(3500%)
+                         hue-rotate(213deg) brightness(101%)
+                         contrast(104%);
+}
+
+
+/* ==========================================================================
+   02. BASE
+   ========================================================================== */
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+
+    background-color: var(--bg-color);
+    color: var(--text-color);
+
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
+}
+
+img,
+video {
+    max-width: 100%;
+}
+
+section {
+    padding: 1.5rem;
+    scroll-margin-top: 100px;
+}
+
+
+/* ==========================================================================
+   03. KEYFRAMES
+   ========================================================================== */
+
+@keyframes title {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+
+/* ==========================================================================
+   04. SHARED SECTION PATTERN
+   Every full-screen section shares: layout, video background, dark overlay,
+   gradient title. Section-specific rules live in 06.
+   ========================================================================== */
+
+:is(#home, #about, #developers, #games, #communities, #socials) {
+    --section-py: 2rem;
+    --section-px: 2rem;
+
+    position: relative;
+    isolation: isolate;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: auto;
+    max-width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+
+    padding:
+        var(--section-py)
+        var(--section-px)
+        calc(var(--section-py) + var(--nav-clearance));
+
+    overflow: hidden;
+    text-align: center;
+
+    background-color: var(--bg-color);
+    border-radius: var(--radius-section) var(--radius-section) 0 0;
+}
+
+:is(#developers, #games) {
+    --section-py: 5rem;
+}
+
+/* Background video */
+:is(#home, #about, #developers, #games, #communities, #socials) .background-video {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center;
+
+    z-index: -2;
+    pointer-events: none;
+}
+
+/* Dark overlay on top of the video */
+:is(#home, #about, #developers, #games, #communities, #socials)::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.60);
+
+    z-index: -1;
+    pointer-events: none;
+    transition: background 0.3s ease;
+}
+
+/* Everything else sits above the overlay */
+:is(#home, #about, #developers, #games, #communities, #socials) > :not(.background-video) {
+    position: relative;
+    z-index: 1;
+}
+
+/* Animated gradient title */
+:is(#home, #about, #developers) .title {
+    background: linear-gradient(246deg, #1c3eff, #eeea41, #39ff74);
+    background-size: 1600% 1600%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: title 10s ease infinite;
+}
+
+/* Shared text */
+:is(#home, #about, #developers, #communities, #socials) h3 {
+    margin: 0 0 15px;
+}
+
+:is(#home, #about, #developers, #communities, #socials) p {
+    max-width: 650px;
+    margin: 0 auto;
+    line-height: 1.7;
+}
+
+
+/* ==========================================================================
+   05. COMPONENTS
+   ========================================================================== */
+
+/* -------------------------
+   5.1 Theme image
+------------------------- */
+
+.theme-image {
+    width: 120px;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(2px 2px 50px rgba(0, 0, 0, 0.5));
+}
+
+
+/* -------------------------
+   5.2 Appearance controls
+------------------------- */
+
+.containerbrc {
+    position: fixed;
+    bottom: 110px;
+    right: 25px;
+    z-index: 1001;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.containerbrc button {
+    padding: 12px 18px;
+
+    border: 1px solid var(--border-color);
+    border-radius: 30px;
+
+    background: var(--surface-color);
+    color: var(--text-color);
+
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.containerbrc button:hover {
+    border-color: var(--accent-color);
+}
+
+
+/* -------------------------
+   5.3 Navbar
+------------------------- */
+
+.navbar {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+
+    display: flex;
+    align-items: center;
+
+    width: max-content;
+    max-width: 95%;
+    padding: 5px;
+
+    background-color: #070707bd;
+    border: 1px solid #fff;
+    border-radius: 32px;
+
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+
+    overflow: hidden;
+}
+
+.navbar .nav-btn {
+    position: relative;
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 12px 16px;
+    box-sizing: border-box;
+
+    color: #f2f2f2;
+    text-decoration: none;
+    text-align: center;
+    white-space: nowrap;
+    font-size: 15px;
+    font-weight: normal;
+
+    border-radius: 24px;
+    transition: color 0.3s ease;
+}
+
+.navbar .nav-btn:hover {
+    color: #0e5aff;
+}
+
+.navbar .nav-btn.active {
+    color: #fff;
+    font-weight: bold;
+}
+
+.navbar .nav-btn img {
+    display: block;
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+
+    transition:
+        filter 0.3s ease,
+        transform 0.3s ease;
+}
+
+.navbar .nav-btn:hover img {
+    filter: var(--icon-hover-filter);
+    transform: scale(1.1);
+}
+
+/* Must stay after :hover so the active icon stays white */
+.navbar .nav-btn.active img {
+    filter: brightness(0) invert(1);
+}
+
+/* Sliding pill behind the active button */
+.navbar .nav-indicator {
+    position: absolute;
+    top: 5px;
+    bottom: 5px;
+    left: 0;
+    width: 0;
+    z-index: 1;
+
+    background-color: var(--blue);
+    border-radius: 24px;
+    pointer-events: none;
+
+    transition:
+        left 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+        width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+/* -------------------------
+   5.4 Nav tooltip
+------------------------- */
+
+.nav-tooltip {
+    position: fixed;
+    bottom: 90px;
+    left: 0;
+    transform: translate(-50%, 8px);
+    z-index: 99999;
+
+    padding: 9px 16px;
+
+    background-color: #070707bd;
+    border: 1px solid var(--blue);
+    border-radius: 12px;
+
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+
+    transition:
+        opacity 0.25s ease,
+        transform 0.25s ease,
+        visibility 0.25s ease;
+}
+
+.nav-tooltip.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, 0);
+}
+
+
+/* -------------------------
+   5.5 Audio toggle
+------------------------- */
+
+.audio-toggle {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    z-index: 9999;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 48px;
+    height: 48px;
+
+    background-color: #070707bd;
+    border: 1px solid #fff;
+    border-radius: 50%;
+
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+
+    color: #fff;
+    font-size: 17px;
+    cursor: pointer;
+
+    transition: all 0.3s ease;
+}
+
+.audio-toggle img {
+    display: block;
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+
+    transition: all 0.3s ease;
+}
+
+.audio-toggle:hover img {
+    filter: var(--icon-hover-filter);
+    transform: scale(1.1);
+}
+
+.audio-toggle:active {
+    transform: scale(0.95);
+}
+
+
+/* -------------------------
+   5.6 Background slider (#galleria)
+------------------------- */
+
+.background-slider {
+    position: relative;
+    isolation: isolate;
+
+    width: 100%;
+    height: 100vh;
+    min-height: 100vh;
+
+    overflow: hidden;
+    background: #101010;
+}
+
+.background-slides {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+}
+
+.background-slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    opacity: 0;
+    transform: scale(1.05);
+    pointer-events: none;
+
+    transition:
+        opacity 1s ease,
+        transform 6s ease;
+}
+
+.background-slide.active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.background-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.65));
+    pointer-events: none;
+}
+
+.background-content {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    padding: 30px;
+    color: #fff;
+    text-align: center;
+    pointer-events: none;
+}
+
+.background-content h1 {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 0 15px;
+
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 700;
+    line-height: 1.15;
+    text-align: center;
+}
+
+.background-content p {
+    width: 100%;
+    max-width: 650px;
+    margin: 0;
+
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    line-height: 1.6;
+    text-align: center;
+    opacity: 0.85;
+}
+
+/* Prev / pause / next */
+.background-controls {
+    position: absolute;
+    left: 50%;
+    bottom: 65px;
+    transform: translateX(-50%);
+    z-index: 10;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.background-controls button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 46px;
+    height: 46px;
+    padding: 10px;
+
+    background-color: #070707bd;
+    border: 1px solid var(--blue);
+    border-radius: 32px;
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    cursor: pointer;
+
+    transition:
+        background 0.25s ease,
+        border-color 0.25s ease;
+}
+
+.background-controls button img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    pointer-events: none;
+
+    transition: all 0.3s ease;
+}
+
+.background-controls button:hover img {
+    filter: var(--icon-hover-filter);
+    transform: scale(1.1);
+}
+
+.background-controls button:active {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.background-controls button:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 3px;
+}
+
+/* Dots */
+.background-indicators {
+    position: absolute;
+    left: 50%;
+    bottom: 35px;
+    transform: translateX(-50%);
+    z-index: 10;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.background-indicators button {
+    width: 8px;
+    height: 8px;
+    padding: 0;
+
+    background: rgba(255, 255, 255, 0.4);
+    border: none;
+    border-radius: 20px;
+
+    cursor: pointer;
+
+    transition:
+        width 0.3s ease,
+        background 0.3s ease;
+}
+
+.background-indicators button.active {
+    width: 25px;
+    background: #fff;
+}
+
+
+/* -------------------------
+   5.7 Card carousel (generic)
+   NOTE: #games overrides these in 6.4. Centering is done by the
+   ::before / ::after spacers, so there is NO justify-content: center here
+   (it makes the left side of an overflowing scroller unreachable).
+------------------------- */
+
+.game-scroll {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 30px 20px;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+}
+
+.game-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.game-scroll::before,
+.game-scroll::after {
+    content: "";
+    flex: 1 0 0;
+}
+
+.game-card {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+
+    flex: 0 0 300px;
+    width: 300px;
+    min-width: 300px;
+
+    background: linear-gradient(180deg, var(--void-2, #0b0d0d), #060707);
+    border: 2px solid var(--line, rgba(255, 255, 255, 0.12));
+    border-radius: 15px;
+    outline: 2px solid #000;
+
+    overflow: hidden;
+    scroll-snap-align: start;
+
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+
+    transition:
+        transform 0.35s var(--ease),
+        border-color 0.35s var(--ease),
+        outline 0.35s var(--ease);
+}
+
+/* Top accent line, shown on hover */
+.game-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+
+    background: linear-gradient(90deg, var(--signal, #2bff88), var(--ember, #ff7a2b));
+    opacity: 0;
+    transition: opacity 0.35s var(--ease);
+}
+
+.game-card:hover {
+    transform: translateY(-8px);
+    outline: 2px solid #fff;
+    border-color: var(--line-strong, rgba(255, 255, 255, 0.4));
+}
+
+.game-card:hover::before {
+    opacity: 1;
+}
+
+.game-icon,
+.game-thumbnail {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.game-thumbnail {
+    transition: transform 0.4s ease;
+}
+
+
+/* -------------------------
+   5.8 Project card
+------------------------- */
+
+.project-card {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+
+    width: 700px;
+    min-width: 300px;
+
+    background: linear-gradient(180deg, var(--void-2, #0b0d0d), #060707);
+    border: 1px solid var(--line, rgba(255, 255, 255, 0.12));
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+
+    overflow: hidden;
+
+    transition:
+        transform 0.35s var(--ease),
+        box-shadow 0.35s var(--ease),
+        border-color 0.35s var(--ease);
+}
+
+.project-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+
+    background: linear-gradient(90deg, var(--signal, #2bff88), var(--ember, #ff7a2b));
+    opacity: 0;
+    transition: opacity 0.35s var(--ease);
+}
+
+.project-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--line-strong, rgba(255, 255, 255, 0.4));
+    box-shadow:
+        0 16px 40px rgba(0, 0, 0, 0.65),
+        0 0 30px rgba(43, 255, 136, 0.08);
+}
+
+.project-card:hover::before {
+    opacity: 1;
+}
+
+.project-header {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    border-radius: 12px 12px 0 0;
+}
+
+.project-header h3 {
+    display: inline-block;
+    margin: 0;
+    padding: 5px 10px;
+
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.project-header p {
+    display: inline-block;
+    margin: 10px 0 0;
+    padding: 4px 8px;
+
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 6px;
+    font-weight: bold;
+}
+
+.project-body {
+    flex: 1;
+}
+
+.project-body p {
+    padding: 1%;
+    color: #ddd;
+    font-size: 90%;
+}
+
+.project-footer {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Play button */
+.play-btn {
+    position: relative;
+
+    display: inline-flex;
+    align-items: center;
+
+    margin: 5px;
+    padding: 10px 20px;
+
+    border: 2px solid #2bff59;
+    border-radius: 8px;
+
+    color: #00f36d;
+    font-weight: bold;
+    text-decoration: none;
+
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.play-btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 35%;
+    height: 100%;
+
+    background: linear-gradient(115deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+    transform: translateX(-140%) skewX(-15deg);
+    pointer-events: none;
+
+    transition: transform 0.6s var(--ease);
+}
+
+.play-btn::after {
+    content: "→";
+    margin-left: 8px;
+    transition: transform 0.3s ease;
+}
+
+.play-btn:hover {
+    border-color: #000;
+    background: #fff;
+    color: #000;
+}
+
+.play-btn:hover::before {
+    transform: translateX(240%) skewX(-15deg);
+}
+
+.play-btn:hover::after {
+    transform: translateX(5px);
+}
+
+.play-btn:focus-visible {
+    outline: 2px solid var(--signal, #2bff88);
+    outline-offset: 3px;
+}
+
+
+/* -------------------------
+   5.9 Footer
+------------------------- */
+
+.footer-centered {
+    padding: 2.5rem 1.5rem;
+
+    background-color: var(--footer-bg, var(--bg-color));
+    color: var(--footer-text-color, var(--text-color));
+    border-top: 1px solid var(--footer-border-color, var(--border-color));
+
+    text-align: center;
+}
+
+.footer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+
+    margin: 0 auto;
+}
+
+.footer-copyright_1 {
+    margin: 0;
+    font-size: 0.875rem;
+}
+
+.footer-copyright_1 p {
+    color: #797979;
+}
+
+.footer-centered_seal {
+    align-items: center;
+}
+
+.footer-centered_seal img {
+    width: 150px;
+    height: auto;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.footer-centered_seal h5 {
+    margin: 15px;
+    color: #333;
+}
+
+/* Hidden note (near-invisible, not selectable) */
+.note1 {
+    position: relative;
+    padding: 20px;
+    border-radius: 12px;
+
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.note1 p {
+    position: relative;
+    z-index: 1;
+
+    filter: blur(1.25px);
+    opacity: 0.01;
+    pointer-events: none;
+}
+
+.note-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+}
+
+
+/* ==========================================================================
+   06. SECTIONS
+   ========================================================================== */
+
+/* -------------------------
+   6.1 Home (#home)
+   Fully covered by the shared section pattern (04).
+------------------------- */
+
+
+/* -------------------------
+   6.2 About (#about)
+------------------------- */
+
+/* Glass panels (shared by About + Developers) */
+#about .countdown-container,
+#developers .developer-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    box-sizing: border-box;
+    text-align: center;
+    overflow: hidden;
+
+    background: var(--glass-bg);
+    border: 2px solid var(--glass-border);
+    border-radius: 32px;
+
+    backdrop-filter: blur(3px) saturate(160%);
+    -webkit-backdrop-filter: blur(3px) saturate(160%);
+}
+
+#about .countdown-container {
+    position: relative;
+    z-index: 1;
+
+    width: 46%;
+    padding: 2.5rem 3rem;
+}
+
+#about .countdown-container img {
+    width: 120px;
+    height: auto;
+    margin-bottom: 1.2rem;
+    object-fit: contain;
+}
+
+#about .about-label {
+    margin-bottom: 0.8rem;
+
+    color: #ffffffb0;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 4px;
+}
+
+#about .countdown-container h2 {
+    margin: 0 0 1.3rem;
+
+    color: #fff;
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    font-weight: 800;
+}
+
+#about .countdown-container h3 {
+    margin: 1.5rem 0 0.6rem;
+
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+#about .countdown-container p {
+    max-width: 650px;
+    margin: 0 0 1rem;
+
+    color: #ffffffd9;
+    font-size: 1rem;
+    line-height: 1.8;
+}
+
+#about .about-footer {
+    margin-top: 0.5rem;
+
+    color: #ffffffa8;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+}
+
+
+/* -------------------------
+   6.3 Developers (#developers)
+------------------------- */
+
+#developers .developers-container {
+    position: relative;
+    z-index: 1;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 100%;
+    max-width: 1100px;
+}
+
+#developers h5 {
+    margin: 0 0 15px;
+    color: rgb(129, 129, 129);
+    line-height: 0.25;
+}
+
+#developers .developers-info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+    gap: 2rem;
+
+    width: 100%;
+    margin-top: 2.5rem;
+}
+
+#developers .developer-card {
+    position: relative;
+
+    flex: 1 1 320px;
+    width: min(100%, 420px);
+    padding: 2.5rem 2rem;
+
+    transition:
+        transform 0.3s ease,
+        background 0.3s ease,
+        border-color 0.3s ease;
+}
+
+#developers .developer-card:hover {
+    transform: translateY(-8px);
+    background: #ffffff30;
+    border-color: #ffffffd9;
+}
+
+#developers .developer-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 140px;
+    height: 140px;
+    margin-bottom: 1.5rem;
+
+    background: #ffffff20;
+    border: 3px solid #fff;
+    border-radius: 50%;
+
+    overflow: hidden;
+}
+
+#developers .developer-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+#developers .developer-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+#developers .developer-details h2 {
+    margin: 0 0 0.5rem;
+
+    color: #fff;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-weight: 800;
+}
+
+#developers .developer-details span {
+    margin-bottom: 1rem;
+
+    color: #ffffffb0;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+#developers .developer-details p {
+    max-width: 350px;
+    margin: 0;
+
+    color: #ffffffd9;
+    font-size: 1rem;
+    line-height: 1.8;
+}
+
+
+/* -------------------------
+   6.4 Games (#games)
+   Overrides the generic carousel in 5.7.
+------------------------- */
+
+#games .game-showcase {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* Slider track */
+#games .game-scroll {
+    --card-width: min(850px, 90%);
+    --gap: 25px;
+    --edge-fade: linear-gradient(
+        90deg,
+        transparent 0%,
+        black 7%,
+        black 93%,
+        transparent 100%
+    );
+
+    position: relative;
+    box-sizing: border-box;
+
+    width: 100%;
+    padding: 25px 0;
+    gap: var(--gap);
+
+    -webkit-mask-image: var(--edge-fade);
+    mask-image: var(--edge-fade);
+}
+
+/* Spacers let the first / last card sit in the true center.
+   The negative margin cancels the flex gap next to each spacer. */
+#games .game-scroll::before,
+#games .game-scroll::after {
+    flex: 0 0 calc((100% - var(--card-width)) / 2);
+}
+
+#games .game-scroll::before { margin-right: calc(var(--gap) * -1); }
+#games .game-scroll::after  { margin-left:  calc(var(--gap) * -1); }
+
+/* Card */
+#games .game-card {
+    flex: 0 0 var(--card-width);
+    width: var(--card-width);
+    min-width: 0;
+    max-width: 100%;
+    min-height: 440px;
+
+    background: #080808;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    outline: none;
+
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+
+    transition:
+        transform 0.4s ease,
+        border-color 0.4s ease;
+}
+
+#games .game-card::before {
+    display: none;
+}
+
+#games .game-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+#games .game-thumbnail {
+    position: absolute;
+    inset: 0;
+
+    background-size: cover;
+    background-position: center;
+
+    transition: transform 0.8s ease;
+}
+
+#games .game-card:hover .game-thumbnail {
+    transform: scale(1.045);
+}
+
+#games .game-overlay {
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(90deg, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.75) 45%, rgba(0, 0, 0, 0.15) 100%),
+        linear-gradient(0deg, rgba(0, 0, 0, 0.65), transparent 65%);
+}
+
+/* Tags */
+#games .game-category {
+    position: absolute;
+    top: 25px;
+    left: 30px;
+
+    display: flex;
+    gap: 10px;
+}
+
+#games .game-category span {
+    padding: 7px 12px;
+
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+
+    backdrop-filter: blur(10px);
+
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+/* Text */
+#games .game-information {
+    position: absolute;
+    left: 35px;
+    bottom: 35px;
+
+    max-width: 480px;
+
+    color: #fff;
+    text-align: left;
+}
+
+#games .game-label {
+    color: rgb(255, 195, 31);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+}
+
+#games .game-information h2 {
+    margin: 12px 0;
+
+    font-size: clamp(25px, 4vw, 42px);
+    font-weight: 800;
+    line-height: 1.1;
+}
+
+#games .game-description {
+    margin-bottom: 25px;
+
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+/* Button */
+#games .game-play {
+    display: inline-flex;
+    align-items: center;
+    gap: 18px;
+
+    padding: 12px 20px;
+
+    background: #fff;
+    border-radius: 6px;
+
+    color: #080808;
+    font-size: 13px;
+    font-weight: 800;
+    text-decoration: none;
+
+    transition: 0.3s ease;
+}
+
+#games .game-play span {
+    font-size: 17px;
+}
+
+#games .game-play:hover {
+    background: var(--green);
+    transform: translateY(-3px);
+}
+
+/* Disabled button (red on hover) */
+#games .game-disabled {
+    display: inline-flex;
+    align-items: center;
+    gap: 18px;
+
+    padding: 12px 20px;
+
+    background: #fff;
+    border-radius: 6px;
+
+    color: #080808;
+    font-size: 13px;
+    font-weight: 800;
+    text-decoration: none;
+
+    transition: 0.3s ease;
+}
+
+#games .game-disabled span {
+    font-size: 17px;
+}
+
+#games .game-disabled:hover {
+    background: rgb(255, 0, 0);
+    transform: translateY(-3px);
+}
+
+/* Arrows */
+#games .game-arrow {
+    position: absolute;
+    z-index: 5;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 45px;
+    height: 45px;
+
+    background: rgba(0, 0, 0, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 50%;
+
+    backdrop-filter: blur(12px);
+
+    color: #fff;
+    font-size: 17px;
+    cursor: pointer;
+
+    transition: 0.3s ease;
+}
+
+#games .game-arrow:hover {
+    background: #fff;
+    color: #000;
+    transform: scale(1.1);
+}
+
+#games .game-arrow.prev { left: -22px; }
+#games .game-arrow.next { right: -22px; }
+
+/* Pagination dots */
+#games .game-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 9px;
+
+    margin-top: 10px;
+}
+
+#games .game-pagination span {
+    width: 8px;
+    height: 8px;
+
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+#games .game-pagination span.active {
+    width: 28px;
+    background: #fff;
+}
+
+
+/* -------------------------
+   6.5 Communities + Socials
+------------------------- */
+
+#communities,
+#socials {
+    background-color: #000;
+}
+
+/* Only the LAST section on the page gets the rounded bottom */
+#socials {
+    border-radius: 0 0 var(--radius-section) var(--radius-section);
+}
+
+:is(#communities, #socials) .title {
+    margin: 0 0 15px;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+}
+
+/* Must stay after the shared "> :not(.background-video)" rule */
+:is(#communities, #socials) .img {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center;
+
+    z-index: -2;
+    pointer-events: none;
+}
+
+.socials-icons,
+.communities-icons {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 35px;
+
+    margin-top: 37px;
+}
+
+.social-link,
+.communities-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 60px;
+    height: 60px;
+
+    transition: transform 0.3s ease;
+}
+
+.social-link img,
+.communities-link img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+
+    transition:
+        transform 0.3s ease,
+        filter 0.3s ease;
+}
+
+.social-link:hover img,
+.communities-link:hover img {
+    filter: var(--icon-hover-filter);
+    transform: translateY(-10px) scale(1.15);
+}
+
+
+/* ==========================================================================
+   07. RESPONSIVE
+   Desktop (> 1024px) is the default above. Each query only overrides.
+   ========================================================================== */
+
+/* -------------------------
+   <= 1024px  tablet landscape / small laptop
+------------------------- */
+
+@media (max-width: 1024px) {
+
+    /* Stops 100vh jumping when mobile toolbars show/hide */
+    #galleria,
+    #projects,
+    #musics,
+    .background-slider {
+        min-height: 100vh;
+        min-height: 100dvh;
+    }
+
+    .background-slider {
+        height: 100vh;
+        height: 100dvh;
+    }
+
+    .project-card {
+        width: 100%;
+        max-width: 700px;
+    }
+}
+
+
+/* -------------------------
+   <= 768px  tablet portrait
+------------------------- */
+
+@media (max-width: 768px) {
+
+    section {
+        scroll-margin-top: 60px;
+    }
+
+    /* Sections: tighter padding + room for the fixed navbar */
+    :is(#home, #about, #developers, #games, #communities, #socials) {
+        --section-px: 1rem;
+        --section-py: 1.5rem;
+        --nav-clearance: 5rem;
+    }
+
+    :is(#developers, #games) {
+        --section-py: 4rem;
+    }
+
+    #projects,
+    #musics {
+        padding: 1.5rem 1rem 6.5rem;
+    }
+
+    #galleria p,
+    #projects p,
+    #musics p,
+    :is(#home, #communities, #socials) p {
+        max-width: 100%;
+        line-height: 1.6;
+    }
+
+    /* The HTML sets width="40%" on this iframe; CSS wins */
+    #musics iframe {
+        width: 85%;
+        max-width: 100%;
+    }
+
+    .theme-image {
+        width: min(180px, 60%);
+    }
+
+    /* Navbar */
+    .navbar {
+        max-width: calc(100% - 24px);
+    }
+
+    .navbar .nav-btn {
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    .nav-tooltip {
+        bottom: 80px;
+    }
+
+    /* Floating controls sit above the navbar */
+    .audio-toggle {
+        bottom: 85px;
+        right: 15px;
+    }
+
+    .containerbrc {
+        bottom: 145px;
+        right: 15px;
+    }
+
+    /* Background slider */
+    .background-content {
+        padding: 20px;
+    }
+
+    .background-controls {
+        bottom: 110px;
+    }
+
+    .background-indicators {
+        bottom: 85px;
+    }
+
+    /* Generic cards */
+    .game-scroll {
+        gap: 16px;
+        padding: 24px 16px;
+    }
+
+    .project-header {
+        height: 200px;
+    }
+
+    .project-footer {
+        padding: 16px;
+    }
+
+    /* About */
+    #about .countdown-container {
+        width: 88%;
+        padding: 2rem 1.5rem;
+        border-radius: 24px;
+    }
+
+    #about .countdown-container img {
+        width: 70px;
+        height: 70px;
+    }
+
+    #about .countdown-container p {
+        font-size: 0.9rem;
+    }
+
+    /* Developers */
+    #developers .developers-info {
+        gap: 1.5rem;
+    }
+
+    #developers .developer-card {
+        flex: 1 1 100%;
+        max-width: 420px;
+        padding: 2rem 1.5rem;
+        border-radius: 24px;
+    }
+
+    #developers .developer-image {
+        width: 110px;
+        height: 110px;
+    }
+
+    #developers .developer-details p {
+        font-size: 0.9rem;
+    }
+
+    /* Games */
+    #games .game-card {
+        min-height: 380px;
+    }
+
+    #games .game-information {
+        left: 20px;
+        right: 20px;
+        bottom: 25px;
+    }
+
+    #games .game-arrow {
+        width: 38px;
+        height: 38px;
+    }
+
+    #games .game-arrow.prev { left: 5px; }
+    #games .game-arrow.next { right: 5px; }
+
+    /* Socials + Communities */
+    .socials-icons,
+    .communities-icons {
+        gap: 24px;
+        margin-top: 28px;
+    }
+
+    /* Footer */
+    .footer-centered {
+        padding: 2rem 1rem 6rem;
+    }
+}
+
+
+/* -------------------------
+   <= 480px  phones
+------------------------- */
+
+@media (max-width: 480px) {
+
+    :is(#home, #about, #developers, #games, #communities, #socials) {
+        --section-px: 0.75rem;
+        --section-py: 1.25rem;
+    }
+
+    :is(#developers, #games) {
+        --section-py: 3rem;
+    }
+
+    #projects,
+    #musics {
+        padding: 1.25rem 0.75rem 6.5rem;
+    }
+
+    #musics iframe {
+        width: 100%;
+    }
+
+    /* Navbar */
+    .navbar {
+        max-width: calc(100% - 16px);
+        padding: 4px;
+    }
+
+    .navbar .nav-btn {
+        padding: 10px 8px;
+        font-size: 12px;
+    }
+
+    .navbar .nav-btn img {
+        width: 20px;
+        height: 20px;
+    }
+
+    /* Floating controls */
+    .audio-toggle {
+        bottom: 80px;
+        right: 12px;
+        width: 42px;
+        height: 42px;
+    }
+
+    .audio-toggle img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .containerbrc {
+        bottom: 132px;
+        right: 12px;
+    }
+
+    .containerbrc button {
+        padding: 10px 14px;
+        font-size: 13px;
+    }
+
+    /* Background slider */
+    .background-controls {
+        bottom: 100px;
+        gap: 10px;
+    }
+
+    .background-controls button {
+        width: 40px;
+        height: 40px;
+        padding: 8px;
+    }
+
+    .background-indicators {
+        bottom: 78px;
+    }
+
+    /* Generic cards */
+    .game-scroll {
+        gap: 12px;
+        padding: 20px 12px;
+    }
+
+    .game-card {
+        flex: 0 0 260px;
+        width: 260px;
+        min-width: 260px;
+    }
+
+    .project-card {
+        min-width: 0;
+    }
+
+    .project-header {
+        height: 170px;
+    }
+
+    .project-header h3 {
+        font-size: 14px;
+    }
+
+    .play-btn {
+        padding: 9px 16px;
+        font-size: 14px;
+    }
+
+    /* About */
+    #about .countdown-container {
+        width: 92%;
+        padding: 1.8rem 1.2rem;
+    }
+
+    #about .about-footer {
+        font-size: 0.65rem;
+        letter-spacing: 2px;
+    }
+
+    /* Developers */
+    #developers .developer-card {
+        padding: 1.8rem 1.2rem;
+    }
+
+    #developers .developer-image {
+        width: 95px;
+        height: 95px;
+    }
+
+    #developers .developer-details span {
+        font-size: 0.7rem;
+        letter-spacing: 1.5px;
+    }
+
+    /* Socials + Communities */
+    .socials-icons,
+    .communities-icons {
+        gap: 16px;
+        margin-top: 24px;
+    }
+
+    .social-link,
+    .communities-link {
+        width: 52px;
+        height: 52px;
+    }
+
+    .social-link img,
+    .communities-link img {
+        width: 36px;
+        height: 36px;
+    }
+
+    /* Footer */
+    .footer-centered_seal img {
+        width: 120px;
+        max-width: 100%;
+    }
+}
+
+
+/* -------------------------
+   <= 360px  very small phones
+------------------------- */
+
+@media (max-width: 360px) {
+
+    .navbar .nav-btn {
+        padding: 10px 6px;
+        font-size: 11px;
+    }
+
+    .game-card {
+        flex: 0 0 230px;
+        width: 230px;
+        min-width: 230px;
+    }
+
+    .socials-icons,
+    .communities-icons {
+        gap: 12px;
+    }
+}
+
+
+/* -------------------------
+   Short landscape screens (phones on their side)
+------------------------- */
+
+@media (max-height: 500px) and (orientation: landscape) {
+
+    .background-content h1 {
+        margin-bottom: 8px;
+        font-size: clamp(1.5rem, 4vw, 2.2rem);
+    }
+
+    .background-controls {
+        bottom: 80px;
+    }
+
+    .background-indicators {
+        bottom: 58px;
+    }
+
+    .containerbrc {
+        bottom: 80px;
+    }
+
+    .audio-toggle {
+        bottom: 20px;
+    }
+}
