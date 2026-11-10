@@ -1,0 +1,115 @@
+/* =========================
+   BOX 1 - LOADING SCREEN
+========================= */
+
+/* Loading Screen */
+#loading-screen {
+    position: fixed;
+    inset: 0;
+
+    width: 100%;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #000000;
+    z-index: 99999;
+
+    opacity: 1;
+    visibility: visible;
+
+    transition:
+        opacity 2s ease,
+        visibility 2s ease;
+}
+
+#loading-screen.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* Loader Animation */
+@keyframes square-animation {
+    0% { left: 0; top: 0; }
+    10.5% { left: 0; top: 0; }
+    12.5% { left: 32px; top: 0; }
+    23% { left: 32px; top: 0; }
+    25% { left: 64px; top: 0; }
+    35.5% { left: 64px; top: 0; }
+    37.5% { left: 64px; top: 32px; }
+    48% { left: 64px; top: 32px; }
+    50% { left: 32px; top: 32px; }
+    60.5% { left: 32px; top: 32px; }
+    62.5% { left: 32px; top: 64px; }
+    73% { left: 32px; top: 64px; }
+    75% { left: 0; top: 64px; }
+    85.5% { left: 0; top: 64px; }
+    87.5% { left: 0; top: 32px; }
+    98% { left: 0; top: 32px; }
+    100% { left: 0; top: 0; }
+}
+
+.loader {
+    position: relative;
+    width: 96px;
+    height: 96px;
+    transform: rotate(45deg);
+}
+
+.loader-square {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 28px;
+    height: 28px;
+    margin: 2px;
+
+    background: white;
+
+    animation: square-animation 10s ease-in-out infinite both;
+}
+.loader-square:nth-of-type(1) {
+    background: #0ec7ff;
+    box-shadow: 0 0 10px #0ec7ff, 0 0 25px #0ec7ff80;
+    animation-delay: 0s;
+}
+
+.loader-square:nth-of-type(2) {
+    background: #00ff80;
+    box-shadow: 0 0 10px #00ff80, 0 0 25px #00ff8080;
+    animation-delay: -1.4285714286s;
+}
+
+.loader-square:nth-of-type(3) {
+    background: #ffe600;
+    box-shadow: 0 0 10px #ffe600, 0 0 25px #ffe60080;
+    animation-delay: -2.8571428571s;
+}
+
+.loader-square:nth-of-type(4) {
+    background: #ff9100;
+    box-shadow: 0 0 10px #ff9100, 0 0 25px #ff910080;
+    animation-delay: -4.2857142857s;
+}
+
+.loader-square:nth-of-type(5) {
+    background: #ffffff;
+    box-shadow: 0 0 10px #ffffff, 0 0 25px #b8b8b880;
+    animation-delay: -5.7142857143s;
+}
+
+.loader-square:nth-of-type(6) {
+    background: #9206c9;
+    box-shadow: 0 0 10px #9206c9, 0 0 25px #9206c980;
+    animation-delay: -7.1428571429s;
+}
+
+.loader-square:nth-of-type(7) {
+    background: #d40b0b;
+    box-shadow: 0 0 10px #d40b0b, 0 0 25px #d40b0b80;
+    animation-delay: -8.5714285714s;
+}
